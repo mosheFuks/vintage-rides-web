@@ -1,4 +1,4 @@
-# PLAN DE CONSTRUCCIÓN — Web de Alquiler de Autos para Eventos
+  # PLAN DE CONSTRUCCIÓN — Web de Alquiler de Autos para Eventos
 
 > Este archivo es el prompt maestro para Claude Code.
 > Ejecutar **una fase por sesión**. No avanzar a la siguiente sin confirmación del usuario.
@@ -47,17 +47,20 @@
 
 ---
 
-## FASE 0 — Repo + scaffold + deploy
+## FASE 0 — Scaffold + deploy
 
-1. Crear repo público en GitHub con nombre neutro: **`vintage-rides-web`**.
-2. Inicializar proyecto: `npm create vite@latest . -- --template react-ts`
+> **El repositorio ya existe y ya está clonado.** Fue creado manualmente por el usuario en GitHub con el nombre `vintage-rides-web`, y contiene un `README.md` y la carpeta `docs/` con este plan y el inventario. **No crear repos ni ejecutar `git init`.**
+
+1. Verificar el estado del repo: `git remote -v` y `git status`. Crear la rama `feat/fase-0-scaffold`.
+2. Inicializar Vite **sobre el directorio actual**: `npm create vite@latest . -- --template react-ts`
+   - El directorio no está vacío (hay `README.md` y `docs/`). Cuando Vite pregunte, elegir **"Ignore files and continue"**. Bajo ninguna circunstancia borrar `docs/` ni el `README.md`.
 3. Instalar: `tailwindcss @tailwindcss/vite vite-react-ssg react-router-dom lucide-react`
 4. Configurar Tailwind v4 vía plugin de Vite.
 5. Configurar `vite.config.ts` con `base: "/vintage-rides-web/"`.
 6. Crear `src/config/site.ts` con los placeholders de arriba.
 7. Crear workflow `.github/workflows/deploy.yml` (build + deploy a Pages en push a `main`).
 8. Página mínima "En construcción" para validar que el deploy funciona.
-9. Verificar que la URL de GitHub Pages carga OK.
+9. Commitear y pushear la rama. **No mergear a `main`.** Avisar al usuario para que revise y mergee él.
 
 **Entregable:** sitio vacío pero desplegado y accesible.
 
@@ -352,7 +355,9 @@ Ruta `/contacto` — datos, WhatsApp, mapa embebido de zona (iframe simple), hor
 
 ## 📋 CHECKLIST DE ARRANQUE
 
-Antes de empezar la Fase 0, confirmar con el usuario:
-- [ ] Nombre de usuario de GitHub
-- [ ] Repo público o privado
-- [ ] Confirmar nombre de repo: `vintage-rides-web`
+Antes de la Fase 0, el usuario ya debe tener hecho:
+- [x] Repo `vintage-rides-web` creado en GitHub (público) y clonado localmente
+- [x] `docs/PLAN-CLAUDE-CODE.md` y `docs/inventario-vehiculos.json` commiteados
+
+Lo único que Claude Code debe preguntar antes de arrancar:
+- [ ] Nombre de usuario de GitHub (para armar la `url` en `site.ts` y el `base` de Vite)
