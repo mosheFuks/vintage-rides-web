@@ -1,24 +1,24 @@
-  # PLAN DE CONSTRUCCIÓN — Web de Alquiler de Autos para Eventos
+# PLAN DE CONSTRUCCIÓN — Web de Alquiler de Autos para Eventos
 
-> Este archivo es el prompt maestro para Claude Code.
-> Ejecutar **una fase por sesión**. No avanzar a la siguiente sin confirmación del usuario.
+> Prompt maestro para Claude Code. **Leer solo la fase que se está ejecutando, no el archivo entero.**
+> Una fase por sesión. No avanzar a la siguiente sin confirmación del usuario.
 
 ---
 
-## ⚙️ REGLAS GLOBALES (leer siempre antes de cada fase)
+## ⚙️ CÓMO SE EJECUTA UNA FASE
 
-### Eficiencia (importante — minimizar tokens)
-- No releer archivos ya leídos en la misma sesión.
-- No imprimir archivos completos en el chat; mostrar solo diffs o resúmenes de 2-3 líneas.
-- No pedir confirmación intermedia dentro de una fase: ejecutar la fase completa y recién ahí reportar.
-- No generar tests unitarios salvo pedido explícito.
-- No crear README extensos ni documentación decorativa.
-- Reutilizar componentes existentes antes de crear nuevos.
+**Al abrir:** leer `ESTADO.md` + la sección de esta fase. Nada más. El mapa del proyecto y las reglas fijas están en `CLAUDE.md`, que ya se carga solo.
 
-### Git
-- Una rama por fase: `feat/fase-N-nombre`.
-- **NUNCA** mergear a `main` automáticamente. Commitear, pushear la rama y avisar.
-- Commits en español, formato: `fase-N: descripción corta`.
+**Durante:** ejecutar la fase completa sin pedir confirmaciones intermedias. Reportar recién al final.
+
+**Al cerrar, en este orden:**
+1. Actualizar `ESTADO.md`: marcar la fase como hecha, listar componentes y rutas nuevas, anotar decisiones que no se deducen del código.
+2. Commitear todo (incluido `ESTADO.md`) y pushear la rama `feat/fase-N-nombre`.
+3. **No mergear a `main`.** Avisar al usuario con un resumen de 3 líneas.
+
+Commits en español: `fase-N: descripción corta`.
+
+> El paso 1 no es opcional. Si `ESTADO.md` no queda actualizado, la próxima sesión tiene que explorar el proyecto desde cero y cuesta el doble.
 
 ### Branding (crítico)
 - **La marca real NO se menciona en ningún lado**: ni en el repo, ni en el código, ni en textos visibles, ni en metadatos.
@@ -49,13 +49,13 @@
 
 ## FASE 0 — Scaffold (local)
 
-> **El repositorio ya existe y ya está clonado.** Fue creado manualmente por el usuario en GitHub con el nombre `vintage-rides-web`, y contiene un `README.md` y la carpeta `docs/` con este plan y el inventario. **No crear repos ni ejecutar `git init`.**
+> **El repositorio ya existe y ya está clonado.** Fue creado manualmente por el usuario en GitHub con el nombre `vintage-rides-web`. Ya contiene: `README.md`, `CLAUDE.md`, `ESTADO.md` y la carpeta `docs/` con este plan y el inventario. **No crear repos, no ejecutar `git init`, no sobrescribir `CLAUDE.md` ni `ESTADO.md`.**
 >
 > Por ahora el proyecto se desarrolla **100% local**, sin deploy. El repo de GitHub existe solo como control de versiones (push de ramas), no hay hosting configurado todavía.
 
 1. Verificar el estado del repo: `git remote -v` y `git status`. Crear la rama `feat/fase-0-scaffold`.
 2. Inicializar Vite **sobre el directorio actual**: `npm create vite@latest . -- --template react-ts`
-   - El directorio no está vacío (hay `README.md` y `docs/`). Cuando Vite pregunte, elegir **"Ignore files and continue"**. Bajo ninguna circunstancia borrar `docs/` ni el `README.md`.
+   - El directorio no está vacío. Cuando Vite pregunte, elegir **"Ignore files and continue"**. Bajo ninguna circunstancia borrar `docs/`, `README.md`, `CLAUDE.md` ni `ESTADO.md`.
 3. Instalar: `tailwindcss @tailwindcss/vite vite-react-ssg react-router-dom lucide-react`
 4. Configurar Tailwind v4 vía plugin de Vite.
 5. Crear `src/config/site.ts` con los placeholders de arriba.
@@ -151,7 +151,10 @@ export interface Vehiculo {
 Crear también `src/data/categorias.ts` (id, nombre, descripción, imagen de portada) y `src/data/trabajos.ts`.
 
 ### ⛔ REGLA CRÍTICA DE CONTENIDO
-**Cargar EXCLUSIVAMENTE los vehículos listados en `inventario-vehiculos.json`.**
+**Cargar EXCLUSIVAMENTE los vehículos listados en `docs/inventario-vehiculos.json`.**
+
+> Esta fase es **la única** que lee ese JSON. Al terminar, los 206 registros quedan en `src/data/vehiculos.ts` y el JSON no se vuelve a abrir nunca más (así está declarado en `CLAUDE.md`). Convertirlo de una sola pasada.
+
 - Prohibido inventar vehículos, años, colores o capacidades que no figuren ahí.
 - Si un campo viene en `null` (típicamente `anio`), dejarlo en `null` y **omitirlo en la UI**. No estimar.
 - `descripcionCorta` y `descripcionLarga` sí se redactan (son texto comercial), pero solo con datos verificables del JSON: marca, modelo, año si existe, color, si es convertible y la nota.

@@ -59,7 +59,8 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 
 ## Decisiones tomadas
 
-- **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice y pueda deployarse a GitHub Pages como estático. Pendiente para una fase posterior (probablemente antes de fase 9/10).
+- **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
+- **El hosting final todavía no está decidido** (GitHub Pages u otro). El proyecto se desarrolla 100% local por ahora; `base` en `vite.config.ts` y `SITE.url` quedan como placeholder hasta que se defina dónde se despliega.
 - **Stack de versiones (fase 0):** React 18.3, Tailwind v4.3 (vía `@tailwindcss/vite`, sin `tailwind.config.js` tradicional), Vite 8.1, TypeScript ~6.0, `react-router-dom` 6.30. Lint con `oxlint` en vez de ESLint.
 - **StickyBar solo visible en mobile** (`lg:hidden`): en desktop la navegación de WhatsApp/consulta vive en el Header, no se duplica.
 
@@ -67,5 +68,5 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 
 ## Pendientes y deuda técnica
 
-- Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render y el deploy a GitHub Pages (mencionado en el plan pero no ejecutado aún).
+- Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render (mencionado en el plan pero no ejecutado aún; necesario para deployar a producción más adelante, sea cual sea el hosting elegido).
 - Todas las páginas (`Home`, `Catalogo`, `Auto`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound`) son placeholders sin contenido real.
