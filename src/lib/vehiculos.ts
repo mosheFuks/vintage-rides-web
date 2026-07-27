@@ -12,6 +12,10 @@ export function getPorId(id: string): Vehiculo | undefined {
   return VEHICULOS.find((v) => v.id === id);
 }
 
+export function getDestacados(): Vehiculo[] {
+  return VEHICULOS.filter((v) => v.destacado);
+}
+
 function normalizar(texto: string): string {
   return texto
     .normalize("NFD")

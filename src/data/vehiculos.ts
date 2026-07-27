@@ -108,7 +108,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Un auto antiguo para darle carácter a tu evento.",
     descripcionLarga: "Ford T 1924 es un auto antiguo del año 1924.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/ford-t-1924/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "ford-a-1930-azul",
@@ -577,7 +577,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Un auto clásico en amarillo y con capota convertible para darle carácter a tu evento.",
     descripcionLarga: "Chevrolet Impala 1963 Convertible es un auto clásico del año 1963 en color amarillo. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/impala-1963-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "buick-1961-conv",
@@ -1122,7 +1122,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Una limousina para darle carácter a tu evento.",
     descripcionLarga: "Limousine Lincoln 1989 es una limousina del año 1989.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos, fiestas de 15 y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este limousina llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/limousine-lincoln-1989/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "limousine-corolla",
@@ -1574,7 +1574,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Un clásico argentino para darle carácter a tu evento.",
     descripcionLarga: "Ford Falcon 1968 es un clásico argentino del año 1968.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este clásico argentino llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/falcon-1968/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "falcon-1980-lujo",
@@ -2221,7 +2221,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Un auto de lujo para darle carácter a tu evento.",
     descripcionLarga: "Mercedes Benz E400 2020 es un auto de lujo del año 2020.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto de lujo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercedes-benz-e400-2020/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "mercedes-benz-clase-c",
@@ -2266,7 +2266,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Una kombi clásica en celeste para darle carácter a tu evento.",
     descripcionLarga: "VW Kombi 1972 Celeste es una kombi clásica del año 1972 en color celeste.\n\nForma parte de nuestra flota para eventos y se puede reservar para producciones publicitarias y rodajes de cine y TV, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este kombi clásica llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/vw-kombi-1972-celeste/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "vw-kombi-1958-amarilla",
@@ -2674,7 +2674,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Una moto clásica para darle carácter a tu evento.",
     descripcionLarga: "Harley Davidson es una moto clásica.\n\nForma parte de nuestra flota para eventos y se puede reservar para producciones publicitarias y rodajes de cine y TV, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este moto clásica llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/harley-davidson/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "ninja-a",
@@ -2901,7 +2901,7 @@ export const VEHICULOS: Vehiculo[] = [
     descripcionCorta: "Un auto moderno en gris para darle carácter a tu evento.",
     descripcionLarga: "Citroën C4 Lounge Gris es un auto moderno en color gris.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/citroen-c4-lounge/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    destacado: true,
   },
   {
     id: "peugeot-508-blanco",
