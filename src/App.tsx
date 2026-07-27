@@ -1,14 +1,31 @@
-import { SITE } from "./config/site";
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "./components/layout/Layout";
+import { Home } from "./pages/Home";
+import { Catalogo } from "./pages/Catalogo";
+import { Auto } from "./pages/Auto";
+import { Nosotros } from "./pages/Nosotros";
+import { Trabajos } from "./pages/Trabajos";
+import { Faq } from "./pages/Faq";
+import { Contacto } from "./pages/Contacto";
+import { Consulta } from "./pages/Consulta";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-neutral-950 px-6 text-center text-neutral-100">
-      <h1 className="text-3xl font-semibold tracking-wide uppercase">
-        {SITE.nombre}
-      </h1>
-      <p className="text-neutral-400">{SITE.tagline}</p>
-      <p className="text-sm text-neutral-500">Sitio en construcción</p>
-    </main>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/catalogo/:categoria" element={<Catalogo />} />
+        <Route path="/auto/:id" element={<Auto />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/trabajos" element={<Trabajos />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/consulta" element={<Consulta />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
   );
 }
 

@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  --color-fondo: #0e0e10;
+  --color-superficie: #16161a;
+  --color-acento: #c9a227;
+  --color-acento-hover: #e0b93d;
+  --color-texto: #f5f3ef;
+  --color-texto-secundario: #a0a0a8;
+  --color-borde: #26262c;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1ebe57;
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
