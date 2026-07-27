@@ -33,7 +33,7 @@
     direccion: "Villa Devoto, CABA",
     instagram: "",
     facebook: "",
-    url: "https://USUARIO.github.io/REPO",
+    url: "http://localhost:5173", // TODO: reemplazar por la URL real cuando el sitio se despliegue
   };
   ```
 
@@ -43,26 +43,28 @@
 - React Router v6 (integrado vía vite-react-ssg)
 - Tailwind CSS
 - lucide-react (íconos)
-- Deploy: GitHub Pages vía GitHub Actions
+- Deploy: **por ahora ninguno, proyecto 100% local.** Cuando el usuario decida subirlo se define destino (GitHub Pages u otro) y se agrega el workflow correspondiente.
 
 ---
 
-## FASE 0 — Scaffold + deploy
+## FASE 0 — Scaffold (local)
 
 > **El repositorio ya existe y ya está clonado.** Fue creado manualmente por el usuario en GitHub con el nombre `vintage-rides-web`, y contiene un `README.md` y la carpeta `docs/` con este plan y el inventario. **No crear repos ni ejecutar `git init`.**
+>
+> Por ahora el proyecto se desarrolla **100% local**, sin deploy. El repo de GitHub existe solo como control de versiones (push de ramas), no hay hosting configurado todavía.
 
 1. Verificar el estado del repo: `git remote -v` y `git status`. Crear la rama `feat/fase-0-scaffold`.
 2. Inicializar Vite **sobre el directorio actual**: `npm create vite@latest . -- --template react-ts`
    - El directorio no está vacío (hay `README.md` y `docs/`). Cuando Vite pregunte, elegir **"Ignore files and continue"**. Bajo ninguna circunstancia borrar `docs/` ni el `README.md`.
 3. Instalar: `tailwindcss @tailwindcss/vite vite-react-ssg react-router-dom lucide-react`
 4. Configurar Tailwind v4 vía plugin de Vite.
-5. Configurar `vite.config.ts` con `base: "/vintage-rides-web/"`.
-6. Crear `src/config/site.ts` con los placeholders de arriba.
-7. Crear workflow `.github/workflows/deploy.yml` (build + deploy a Pages en push a `main`).
-8. Página mínima "En construcción" para validar que el deploy funciona.
-9. Commitear y pushear la rama. **No mergear a `main`.** Avisar al usuario para que revise y mergee él.
+5. Crear `src/config/site.ts` con los placeholders de arriba.
+6. Página mínima "En construcción" para validar que el proyecto corre con `npm run dev`.
+7. Commitear y pushear la rama. **No mergear a `main`.** Avisar al usuario para que revise y mergee él.
 
-**Entregable:** sitio vacío pero desplegado y accesible.
+> **Diferido hasta que se decida subir el sitio (no hacer ahora):** `base` en `vite.config.ts` (depende de dónde se hostee), workflow de GitHub Actions / elección de hosting, y el valor final de `SITE.url`.
+
+**Entregable:** sitio vacío corriendo localmente (`npm run dev`).
 
 ---
 
@@ -318,6 +320,8 @@ Ruta `/contacto` — datos, WhatsApp, mapa embebido de zona (iframe simple), hor
 - URLs limpias, sin espacios, sin `.html`.
 - `lang="es"` y charset UTF-8 correcto.
 
+> **Nota:** `sitemap.xml`, `og:url` y los JSON-LD dependen de `SITE.url`. Mientras el proyecto sea local, van a quedar apuntando a `localhost` — se corrige ese valor recién cuando se defina el dominio/hosting real.
+
 ### Performance
 - Todas las imágenes en **WebP**, con `loading="lazy"` (excepto el hero) y `width`/`height` explícitos para evitar CLS.
 - Blur placeholder o skeleton mientras cargan.
@@ -340,7 +344,7 @@ Ruta `/contacto` — datos, WhatsApp, mapa embebido de zona (iframe simple), hor
 
 - Probar en 360px, 390px, 768px, 1024px, 1440px.
 - Verificar que todos los links de WhatsApp abran correctamente en iOS y Android.
-- Verificar que las URLs de modelo prerenderizadas devuelvan HTML con las OG tags correctas (`curl` a la URL).
+- Verificar que las URLs de modelo prerenderizadas devuelvan HTML con las OG tags correctas (`curl` contra el build local con `vite preview`; repetir contra la URL real una vez desplegado).
 - Navegación por teclado + contraste AA.
 - Corregir cualquier warning de consola.
 - Checklist de marca. Deben devolver **0 resultados**:
@@ -359,5 +363,7 @@ Antes de la Fase 0, el usuario ya debe tener hecho:
 - [x] Repo `vintage-rides-web` creado en GitHub (público) y clonado localmente
 - [x] `docs/PLAN-CLAUDE-CODE.md` y `docs/inventario-vehiculos.json` commiteados
 
-Lo único que Claude Code debe preguntar antes de arrancar:
-- [ ] Nombre de usuario de GitHub (para armar la `url` en `site.ts` y el `base` de Vite)
+Nada que preguntar para arrancar la Fase 0: el proyecto es local por ahora, con `SITE.url` en `http://localhost:5173` como placeholder.
+
+Cuando el usuario decida desplegar el sitio, ahí sí Claude Code debe preguntar:
+- [ ] Dónde se va a hostear (GitHub Pages u otro) y, si aplica, usuario/org de GitHub (para `SITE.url` y el `base` de Vite)
