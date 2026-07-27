@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 3 — Home
-**Próxima fase:** 4 — Catálogo + buscador + filtros
-**Rama activa:** `feat/fase-3-home` (sin mergear a `main` todavía)
+**Última fase completada:** 4 — Catálogo + buscador + filtros
+**Próxima fase:** 5 — Página de modelo
+**Rama activa:** `feat/fase-4-catalogo` (sin mergear a `main` todavía)
 
 ---
 
@@ -17,7 +17,7 @@
 | 1 | Sistema de diseño + layout | ✅ hecha | `feat/fase-1-diseno-layout` | sí |
 | 2 | Modelo de datos | ✅ hecha | `feat/fase-2-modelo-datos` | no |
 | 3 | Home | ✅ hecha | `feat/fase-3-home` | no |
-| 4 | Catálogo + buscador + filtros | ⬜ pendiente | — | — |
+| 4 | Catálogo + buscador + filtros | ✅ hecha | `feat/fase-4-catalogo` | no |
 | 5 | Página de modelo | ⬜ pendiente | — | — |
 | 6 | Motor de WhatsApp | ⬜ pendiente | — | — |
 | 7 | About + trabajos | ⬜ pendiente | — | — |
@@ -37,7 +37,8 @@
 `Container` — `src/components/ui/Container.tsx` — wrapper de ancho máximo (max-w-7xl) con padding horizontal
 `SectionTitle` — `src/components/ui/SectionTitle.tsx` — eyebrow + título + descripción opcional, align left/center
 `Placeholder` — `src/components/ui/Placeholder.tsx` — contenido temporal "Próximamente" usado por las páginas que todavía no se implementaron (Container + SectionTitle)
-`VehiculoCard` — `src/components/vehiculos/VehiculoCard.tsx` — tarjeta de vehículo (imagen, nombre, año, descripción corta, capacidad); pensada para reusarse en Catálogo (Fase 4) y Auto (Fase 5)
+`VehiculoCard` — `src/components/vehiculos/VehiculoCard.tsx` — tarjeta de vehículo (imagen, nombre, año, descripción corta, capacidad). Props nuevas en Fase 4: `mostrarAcciones` (agrega fila "Ver más" + "Agregar/Agregado a consulta", usada en Catálogo) y `className` (para que cada contexto controle el ancho: `w-72 shrink-0` en el carrusel de Destacados, ancho completo en la grilla de Catálogo)
+`FiltrosCatalogo` — `src/components/catalogo/FiltrosCatalogo.tsx` — grupos de checkboxes (categoría, tipo de evento, década, color), slider de capacidad mínima y toggle de convertible; mismo componente para el aside desktop y el drawer mobile de `Catalogo`
 `Hero` — `src/components/home/Hero.tsx` — sección hero de la Home: imagen de fondo, tagline, 2 CTAs
 `CategoriasGrid` — `src/components/home/CategoriasGrid.tsx` — grilla de las 8 categorías con link a `/catalogo/:categoria`
 `Destacados` — `src/components/home/Destacados.tsx` — carrusel horizontal de `VehiculoCard` con los vehículos `destacado: true`
@@ -48,11 +49,11 @@
 
 ## Rutas implementadas
 
-Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.tsx`). `/` tiene contenido real (Fase 3); el resto renderiza `Placeholder` por ahora:
+Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.tsx`). `/` y `/catalogo` (+ `/catalogo/:categoria`) tienen contenido real; el resto renderiza `Placeholder` por ahora:
 
 - `/` — Home (Fase 3: Hero, categorías, destacados, prueba social, CTA)
-- `/catalogo` — Catálogo
-- `/catalogo/:categoria` — Catálogo filtrado por categoría
+- `/catalogo` — Catálogo (Fase 4: buscador, filtros, grilla paginada)
+- `/catalogo/:categoria` — Catálogo, precarga el filtro de categoría (ver decisiones)
 - `/auto/:id` — Página de modelo
 - `/nosotros` — Nosotros
 - `/trabajos` — Trabajos
@@ -86,6 +87,14 @@ Página compuesta en `src/pages/Home.tsx` a partir de 5 secciones en `src/compon
 
 ---
 
+## Catálogo (Fase 4)
+
+Página en `src/pages/Catalogo.tsx`. Buscador (nombre + año, debounce 300ms) + filtros (categoría, tipo de evento, década, color: multi; capacidad mínima: slider; convertible: toggle) en `src/components/catalogo/FiltrosCatalogo.tsx`, sidebar fija en desktop y drawer a pantalla completa en mobile (botón "Filtros"). Todo el estado de filtros vive en los **query params** de la URL (compartible/bookmarkeable), no en `useState`. Contador de resultados, botón "Limpiar filtros" y estado vacío diseñado. Grilla con "Ver más vehículos" que suma de a 24 (`LOTE`), sin scroll infinito. Cada card usa `VehiculoCard` con `mostrarAcciones` (botones "Ver más" y "Agregar/Agregado a consulta").
+
+`npx tsc -b` y `npm run build` corren sin errores. **No se probó en navegador esta sesión** (Playwright no estaba instalado y el usuario prefirió no instalarlo ahora): falta verificar visualmente buscador, filtros, drawer mobile y el toggle de "Agregar a consulta" antes de dar la fase por validada en UI.
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -100,13 +109,20 @@ Página compuesta en `src/pages/Home.tsx` a partir de 5 secciones en `src/compon
 - **Imágenes por `background-image`, no `<img>`:** Hero, categorías, destacados y trabajos aplican la imagen como fondo CSS sobre un contenedor `bg-superficie`. Así, mientras no haya fotos reales, se ve un panel de color sólido en vez de un ícono de imagen rota — se eligió este patrón para toda la Home y se espera reusarlo en Catálogo/Auto.
 - **Mensaje de WhatsApp armado inline en cada componente** (`Hero`, `CtaFinal`), replicando el patrón ya usado en `StickyBar`. No se creó `src/lib/whatsapp.ts` porque esa es una decisión de diseño de Fase 6 ("Motor de WhatsApp"); hasta entonces se acepta la pequeña duplicación del mensaje genérico.
 - **`getDestacados()` agregado a `src/lib/vehiculos.ts`** siguiendo el mismo patrón que `getPorCategoria`/`getPorId`.
+- **`filtrar()` rediseñado en Fase 4 para filtros múltiples** (`categorias`, `eventos`, `decadas`, `colores` como arrays) y con un campo `texto` que matchea nombre o año. Se eliminó `buscar()` (no tenía otros usos y quedó subsumida por `filtrar({ texto })`) para no mantener dos rutas de normalización de texto en paralelo.
+- **`getDecadasDisponibles()`, `getColoresDisponibles()` y `getCapacidadMaxima()`** agregadas a `src/lib/vehiculos.ts`: derivan las opciones de los filtros de década/color/capacidad directamente de `VEHICULOS` en vez de hardcodearlas, para no inventar valores que no estén en los datos.
+- **`src/data/eventos.ts` nuevo**: labels en español para los 7 valores de `TipoEvento` (`{ id, nombre }`, mismo patrón que `categorias.ts`). Es solo texto de UI para un `type` ya existente, no dato de negocio inventado.
+- **`/catalogo/:categoria` solo precarga el filtro la primera vez**: un `useEffect` copia el param de ruta al query param `categoria` únicamente si este todavía no está seteado en la URL. Si el usuario después deselecciona esa categoría desde el sidebar, la URL sigue mostrando `/catalogo/:categoria` en el path pero los resultados ya no están filtrados por ella — se aceptó esta pequeña inconsistencia de path vs. resultados para no duplicar la fuente de verdad (los query params mandan siempre).
+- **"Agregar a consulta" con persistencia mínima en `localStorage`** (`src/lib/consulta.ts`, clave `consulta-vehiculos`, solo `estaEnConsulta`/`toggleConsulta`). Es el único pedazo de la Fase 6 ("carrito" de consulta múltiple) que se adelantó, porque el plan de Fase 4 pide explícitamente el botón en cada card. No se creó contador visible (badge en Header/StickyBar) ni la página `/consulta` real: eso es contenido de Fase 6.
+- **`VehiculoCard` dejó de ser un único `<Link>` envolviendo toda la tarjeta.** Ahora es un `<div>` con un `<Link className="contents">` alrededor de imagen+datos, y la fila de acciones (Fase 4) queda fuera del link como hermano — necesario porque un `<button>` (Agregar a consulta) no puede anidarse dentro de un `<a>`. El ancho fijo `w-72 shrink-0` que tenía el componente se movió a la prop `className` (ver arriba), así el carrusel de Destacados y la grilla de Catálogo pueden pedir anchos distintos sin bifurcar el componente.
 
 ---
 
 ## Pendientes y deuda técnica
 
 - Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render (mencionado en el plan pero no ejecutado aún; necesario para deployar a producción más adelante, sea cual sea el hosting elegido).
-- `Catalogo`, `Auto`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound` siguen siendo placeholders sin contenido real. `Home` ya tiene contenido real (Fase 3).
+- **Probar el Catálogo (Fase 4) en navegador**: no se hizo esta sesión (ver "Catálogo (Fase 4)" arriba). Verificar buscador con debounce, cada grupo de filtros, drawer mobile, "Ver más vehículos" y el toggle "Agregar a consulta" en desktop y mobile antes de mergear.
+- `Auto`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3) y `Catalogo` (Fase 4) ya tienen contenido real.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).

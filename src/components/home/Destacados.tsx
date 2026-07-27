@@ -19,7 +19,7 @@ export function Destacados() {
       <Container className="overflow-x-auto">
         <div className="flex gap-6 pb-4">
           {destacados.map((vehiculo) => (
-            <VehiculoCard key={vehiculo.id} vehiculo={vehiculo} />
+            <VehiculoCard key={vehiculo.id} vehiculo={vehiculo} className="w-72 shrink-0" />
           ))}
         </div>
       </Container>
