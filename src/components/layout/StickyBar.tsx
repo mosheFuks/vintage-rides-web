@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, ClipboardList } from "lucide-react";
-import { SITE } from "../../config/site";
+import { useConsulta } from "../../lib/consulta";
+import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
 
-const MENSAJE_GENERAL = "Hola! Te quería hacer una consulta sobre el alquiler de autos.";
-const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(MENSAJE_GENERAL)}`;
+const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
 export function StickyBar() {
+  const { ids } = useConsulta();
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-borde bg-superficie lg:hidden">
       <a
@@ -19,9 +21,14 @@ export function StickyBar() {
       </a>
       <Link
         to="/consulta"
-        className="flex items-center justify-center gap-2 border-l border-borde px-5 text-sm font-medium tracking-wide text-texto uppercase transition-colors duration-200 hover:text-acento"
+        className="relative flex items-center justify-center gap-2 border-l border-borde px-5 text-sm font-medium tracking-wide text-texto uppercase transition-colors duration-200 hover:text-acento"
       >
         <ClipboardList className="size-4" />
+        {ids.length > 0 && (
+          <span className="absolute top-2 right-3 flex size-4 items-center justify-center rounded-full bg-acento text-[10px] text-fondo">
+            {ids.length}
+          </span>
+        )}
       </Link>
     </div>
   );

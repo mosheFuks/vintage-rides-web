@@ -1,10 +1,9 @@
 import { Button } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { SectionTitle } from "../ui/SectionTitle";
-import { SITE } from "../../config/site";
+import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
 
-const MENSAJE_GENERAL = "Hola! Quiero hacer una consulta sobre el alquiler de un vehículo para mi evento.";
-const WHATSAPP_HREF = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(MENSAJE_GENERAL)}`;
+const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
 export function CtaFinal() {
   return (

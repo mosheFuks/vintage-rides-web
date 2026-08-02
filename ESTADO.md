@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 5 — Página de modelo
-**Próxima fase:** 6 — Motor de WhatsApp
-**Rama activa:** `feat/fase-5-pagina-modelo` (sin mergear a `main` todavía)
+**Última fase completada:** 6 — Motor de WhatsApp
+**Próxima fase:** 7 — About + trabajos
+**Rama activa:** `feat/fase-6-whatsapp` (sin mergear a `main` todavía)
 
 ---
 
@@ -19,7 +19,7 @@
 | 3 | Home | ✅ hecha | `feat/fase-3-home` | no |
 | 4 | Catálogo + buscador + filtros | ✅ hecha | `feat/fase-4-catalogo` | no |
 | 5 | Página de modelo | ✅ hecha | `feat/fase-5-pagina-modelo` | no |
-| 6 | Motor de WhatsApp | ⬜ pendiente | — | — |
+| 6 | Motor de WhatsApp | ✅ hecha | `feat/fase-6-whatsapp` | no |
 | 7 | About + trabajos | ⬜ pendiente | — | — |
 | 8 | FAQ + contacto | ⬜ pendiente | — | — |
 | 9 | SEO + performance + analytics | ⬜ pendiente | — | — |
@@ -40,6 +40,7 @@
 `VehiculoCard` — `src/components/vehiculos/VehiculoCard.tsx` — tarjeta de vehículo (imagen, nombre, año, descripción corta, capacidad). Props nuevas en Fase 4: `mostrarAcciones` (agrega fila "Ver más" + "Agregar/Agregado a consulta", usada en Catálogo) y `className` (para que cada contexto controle el ancho: `w-72 shrink-0` en el carrusel de Destacados, ancho completo en la grilla de Catálogo)
 `FiltrosCatalogo` — `src/components/catalogo/FiltrosCatalogo.tsx` — grupos de checkboxes (categoría, tipo de evento, década, color), slider de capacidad mínima y toggle de convertible; mismo componente para el aside desktop y el drawer mobile de `Catalogo`
 `GaleriaVehiculo` — `src/components/vehiculos/GaleriaVehiculo.tsx` — imagen principal + tira de miniaturas (solo si hay más de 1 foto) + lightbox fullscreen con flechas, swipe táctil, navegación por teclado (Esc/flechas) y contador "n / total". Usada en `Auto`
+`WhatsappFlotante` — `src/components/layout/WhatsappFlotante.tsx` — botón circular fijo abajo a la derecha, solo desktop (`hidden lg:flex`), con el mensaje general de `lib/whatsapp.ts`. En mobile ese rol lo cumple `StickyBar`
 `Hero` — `src/components/home/Hero.tsx` — sección hero de la Home: imagen de fondo, tagline, 2 CTAs
 `CategoriasGrid` — `src/components/home/CategoriasGrid.tsx` — grilla de las 8 categorías con link a `/catalogo/:categoria`
 `Destacados` — `src/components/home/Destacados.tsx` — carrusel horizontal de `VehiculoCard` con los vehículos `destacado: true`
@@ -60,7 +61,7 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 - `/trabajos` — Trabajos
 - `/faq` — FAQ
 - `/contacto` — Contacto
-- `/consulta` — Consulta
+- `/consulta` — Consulta (Fase 6: lista de vehículos seleccionados + formulario previo opcional + envío por WhatsApp)
 - `*` — NotFound
 
 ---
@@ -104,6 +105,20 @@ Página en `src/pages/Auto.tsx` (ruta `/auto/:id`). Si `getPorId` no encuentra e
 
 ---
 
+## Motor de WhatsApp (Fase 6)
+
+`src/lib/whatsapp.ts` centraliza todos los mensajes: `mensajeGeneral()`, `mensajeModelo(vehiculo)`, `mensajeConsultaMultiple(vehiculos, datos?)` y `armarUrlWhatsapp(mensaje)` (arma la URL `wa.me` con `SITE.whatsapp`). También expone `urlVehiculo(id)` para armar la URL absoluta de un modelo con `SITE.url`. Reemplaza los mensajes inline que había en `StickyBar`, `Hero`, `CtaFinal` y `Auto` (que además estaban ligeramente desincronizados entre sí).
+
+`src/lib/consulta.tsx` pasó de un par de funciones sobre `localStorage` a un Context (`ConsultaProvider`) + hook (`useConsulta`), persistido en `sessionStorage` según el plan. Expone `ids`, `estaEnConsulta`, `toggleConsulta`, `quitarDeConsulta` y `vaciarConsulta`. `main.tsx` envuelve `<App />` con `<ConsultaProvider>`. `VehiculoCard` y `Auto` ahora leen del contexto en vez de tener cada uno su propio `useState` local — así el contador del Header/StickyBar se actualiza al instante al tocar "Agregar a consulta" desde cualquier lado.
+
+Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya existente de `StickyBar` (mobile). El contador de la consulta múltiple aparece como badge en el ícono de `Header` (desktop, nuevo) y en el ícono de `StickyBar` (mobile).
+
+`/consulta` (`src/pages/Consulta.tsx`) ahora tiene contenido real: si no hay vehículos seleccionados muestra un estado vacío con link al catálogo; si hay, lista cada uno (miniatura, nombre, año, botón quitar) + botón "Vaciar consulta", y un formulario opcional (fecha, zona, tipo de evento, duración estimada, comentario — ninguno bloquea el envío) que arma el mensaje final con `mensajeConsultaMultiple`. Botón "Enviar por WhatsApp" al final.
+
+`npx tsc -b`, `npm run build` y `npm run lint` corren sin errores (el lint deja dos warnings esperables de `react-hooks/exhaustive-deps` y uno de `react-refresh` en `consulta.tsx` por exportar el hook junto al Provider, mismo criterio ya aceptado en `Catalogo.tsx`). **No se probó en navegador esta sesión** (ver "Pendientes y deuda técnica").
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -129,6 +144,11 @@ Página en `src/pages/Auto.tsx` (ruta `/auto/:id`). Si `getPorId` no encuentra e
 - **"Compartir" usa Web Share API (`navigator.share`) con fallback a `navigator.clipboard.writeText`** + mensaje "¡Copiado!" temporal (2s) en el mismo botón. No se agregó librería de toast para esto.
 - **Solo 1 foto por vehículo en los datos actuales** (`vehiculos.ts`), así que `GaleriaVehiculo` oculta miniaturas, flechas y contador cuando `imagenes.length === 1` — esa lógica ya está resuelta en el componente, no hace falta tocarla cuando entren fotos reales.
 - **`/auto/:id` con id inexistente no redirige**: muestra un mensaje "No encontramos ese vehículo" con botón de vuelta a `/catalogo`, en vez de reusar `NotFound` (esa página es para rutas que no matchean, esta es para un id inválido dentro de una ruta válida).
+- **Persistencia de la consulta múltiple cambiada de `localStorage` a `sessionStorage`** (Fase 6), siguiendo la letra del plan. Efecto práctico: la lista de "Agregar a consulta" ahora se pierde al cerrar la pestaña/navegador, no es permanente entre sesiones. Se aceptó porque así lo pide `docs/PLAN-CLAUDE-CODE.md` para el `ConsultaContext`; si en QA (Fase 10) se prefiere que sobreviva más tiempo, es un cambio de una palabra en `src/lib/consulta.tsx`.
+- **`src/lib/consulta.tsx`** (cambió de `.ts` a `.tsx` porque ahora exporta un componente `ConsultaProvider`) reemplaza por completo al archivo de Fase 4: no quedó ninguna función vieja ni wrapper de compatibilidad, todos los consumidores (`VehiculoCard`, `Auto`, `Header`, `StickyBar`, `Consulta`) se migraron al hook `useConsulta()`.
+- **Mensaje general de WhatsApp unificado**: Fase 3 tenía dos textos ligeramente distintos para el mismo botón ("Te quería hacer una consulta..." en `StickyBar` vs. "Quiero hacer una consulta..." en `Hero`/`CtaFinal`). Fase 6 los reemplaza a todos por el texto único de `mensajeGeneral()` (el que ya estaba en `StickyBar`, que coincide con el que pide el plan textualmente).
+- **Botón flotante de WhatsApp solo en desktop** (`WhatsappFlotante`, `hidden lg:flex`): en mobile ese rol ya lo cumple el botón grande de `StickyBar`, no se duplica. Con esto se completa la decisión de Fase 1 de que "la navegación de WhatsApp/consulta vive en el Header" — en la práctica quedó repartida entre Header (contador de consulta), el botón flotante (WhatsApp general en desktop) y StickyBar (ambos en mobile), en vez de meter todo dentro del `<Header>`.
+- **Formulario de `/consulta` sin `<form>` ni validación bloqueante**: los 5 campos (fecha, zona, evento, duración, comentario) son inputs controlados sueltos dentro de un `<div>`, todos opcionales; el botón "Enviar por WhatsApp" es un link (`Button` con `href` + `external`) que recalcula el mensaje en cada render, no un submit.
 
 ---
 
@@ -137,7 +157,8 @@ Página en `src/pages/Auto.tsx` (ruta `/auto/:id`). Si `getPorId` no encuentra e
 - Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render (mencionado en el plan pero no ejecutado aún; necesario para deployar a producción más adelante, sea cual sea el hosting elegido).
 - **Probar el Catálogo (Fase 4) en navegador**: no se hizo esta sesión (ver "Catálogo (Fase 4)" arriba). Verificar buscador con debounce, cada grupo de filtros, drawer mobile, "Ver más vehículos" y el toggle "Agregar a consulta" en desktop y mobile antes de mergear.
 - **Probar la Página de modelo (Fase 5) en navegador**: tampoco se hizo esta sesión (ver "Página de modelo (Fase 5)" arriba). Falta verificar la galería/lightbox (flechas, swipe, teclado) con fotos reales, el botón Compartir en un navegador con y sin Web Share API, y el estado de "vehículo no encontrado".
-- `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4) y `Auto` (Fase 5) ya tienen contenido real.
+- **Probar el Motor de WhatsApp (Fase 6) en navegador**: tampoco se hizo esta sesión. Falta verificar: botón flotante desktop vs. StickyBar mobile (que no se pisen/dupliquen), que el contador del Header y StickyBar se actualice en vivo al tocar "Agregar a consulta" desde distintas páginas, el flujo completo de `/consulta` (agregar varios, completar el formulario opcional, confirmar el texto final que llega a WhatsApp) y que la consulta efectivamente se pierda al cerrar la pestaña (por el cambio a `sessionStorage`).
+- `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4), `Auto` (Fase 5) y `Consulta` (Fase 6) ya tienen contenido real.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).

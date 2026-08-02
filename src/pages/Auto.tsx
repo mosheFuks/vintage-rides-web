@@ -8,9 +8,9 @@ import { GaleriaVehiculo } from "../components/vehiculos/GaleriaVehiculo";
 import { VehiculoCard } from "../components/vehiculos/VehiculoCard";
 import { CATEGORIAS } from "../data/categorias";
 import { EVENTOS } from "../data/eventos";
-import { SITE } from "../config/site";
 import { getPorId, getRelacionados, getTrabajosDeVehiculo } from "../lib/vehiculos";
-import { estaEnConsulta, toggleConsulta } from "../lib/consulta";
+import { useConsulta } from "../lib/consulta";
+import { armarUrlWhatsapp, mensajeModelo, urlVehiculo } from "../lib/whatsapp";
 import type { Vehiculo } from "../types";
 
 export function Auto() {
@@ -33,29 +33,26 @@ export function Auto() {
 }
 
 function FichaVehiculo({ vehiculo }: { vehiculo: Vehiculo }) {
-  const [enConsulta, setEnConsulta] = useState(() => estaEnConsulta(vehiculo.id));
+  const { estaEnConsulta, toggleConsulta } = useConsulta();
+  const enConsulta = estaEnConsulta(vehiculo.id);
   const [copiado, setCopiado] = useState(false);
 
   const categoria = CATEGORIAS.find((c) => c.id === vehiculo.categoria);
   const trabajos = getTrabajosDeVehiculo(vehiculo.id);
   const relacionados = getRelacionados(vehiculo);
-  const urlVehiculo = `${SITE.url}/auto/${vehiculo.id}`;
-
-  const mensajeWhatsapp = `Hola! Te quería consultar por la disponibilidad del modelo ${vehiculo.nombre}${
-    vehiculo.anio ? ` ${vehiculo.anio}` : ""
-  }.\n${urlVehiculo}`;
-  const whatsappHref = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(mensajeWhatsapp)}`;
+  const whatsappHref = armarUrlWhatsapp(mensajeModelo(vehiculo));
 
   async function compartir() {
+    const url = urlVehiculo(vehiculo.id);
     if (navigator.share) {
       try {
-        await navigator.share({ title: vehiculo.nombre, url: urlVehiculo });
+        await navigator.share({ title: vehiculo.nombre, url });
       } catch {
         // el usuario cerró el diálogo de compartir, no hacer nada
       }
       return;
     }
-    await navigator.clipboard.writeText(urlVehiculo);
+    await navigator.clipboard.writeText(url);
     setCopiado(true);
     setTimeout(() => setCopiado(false), 2000);
   }
@@ -147,7 +144,7 @@ function FichaVehiculo({ vehiculo }: { vehiculo: Vehiculo }) {
             </Button>
             <Button
               variant={enConsulta ? "outline" : "primary"}
-              onClick={() => setEnConsulta(toggleConsulta(vehiculo.id))}
+              onClick={() => toggleConsulta(vehiculo.id)}
               className="flex-1"
             >
               {enConsulta ? <Check className="size-4" /> : <Plus className="size-4" />}
