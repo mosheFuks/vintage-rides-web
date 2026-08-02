@@ -82,3 +82,9 @@ export function getCapacidadMaxima(): number {
 export function getTrabajosDeVehiculo(vehiculoId: string): Trabajo[] {
   return TRABAJOS.filter((t) => t.vehiculosIds.includes(vehiculoId));
 }
+
+export function getRelacionados(vehiculo: Vehiculo, cantidad = 3): Vehiculo[] {
+  return getPorCategoria(vehiculo.categoria)
+    .filter((v) => v.id !== vehiculo.id)
+    .slice(0, cantidad);
+}

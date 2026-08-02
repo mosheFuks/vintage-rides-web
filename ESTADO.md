@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 4 — Catálogo + buscador + filtros
-**Próxima fase:** 5 — Página de modelo
-**Rama activa:** `feat/fase-4-catalogo` (sin mergear a `main` todavía)
+**Última fase completada:** 5 — Página de modelo
+**Próxima fase:** 6 — Motor de WhatsApp
+**Rama activa:** `feat/fase-5-pagina-modelo` (sin mergear a `main` todavía)
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | Modelo de datos | ✅ hecha | `feat/fase-2-modelo-datos` | no |
 | 3 | Home | ✅ hecha | `feat/fase-3-home` | no |
 | 4 | Catálogo + buscador + filtros | ✅ hecha | `feat/fase-4-catalogo` | no |
-| 5 | Página de modelo | ⬜ pendiente | — | — |
+| 5 | Página de modelo | ✅ hecha | `feat/fase-5-pagina-modelo` | no |
 | 6 | Motor de WhatsApp | ⬜ pendiente | — | — |
 | 7 | About + trabajos | ⬜ pendiente | — | — |
 | 8 | FAQ + contacto | ⬜ pendiente | — | — |
@@ -39,6 +39,7 @@
 `Placeholder` — `src/components/ui/Placeholder.tsx` — contenido temporal "Próximamente" usado por las páginas que todavía no se implementaron (Container + SectionTitle)
 `VehiculoCard` — `src/components/vehiculos/VehiculoCard.tsx` — tarjeta de vehículo (imagen, nombre, año, descripción corta, capacidad). Props nuevas en Fase 4: `mostrarAcciones` (agrega fila "Ver más" + "Agregar/Agregado a consulta", usada en Catálogo) y `className` (para que cada contexto controle el ancho: `w-72 shrink-0` en el carrusel de Destacados, ancho completo en la grilla de Catálogo)
 `FiltrosCatalogo` — `src/components/catalogo/FiltrosCatalogo.tsx` — grupos de checkboxes (categoría, tipo de evento, década, color), slider de capacidad mínima y toggle de convertible; mismo componente para el aside desktop y el drawer mobile de `Catalogo`
+`GaleriaVehiculo` — `src/components/vehiculos/GaleriaVehiculo.tsx` — imagen principal + tira de miniaturas (solo si hay más de 1 foto) + lightbox fullscreen con flechas, swipe táctil, navegación por teclado (Esc/flechas) y contador "n / total". Usada en `Auto`
 `Hero` — `src/components/home/Hero.tsx` — sección hero de la Home: imagen de fondo, tagline, 2 CTAs
 `CategoriasGrid` — `src/components/home/CategoriasGrid.tsx` — grilla de las 8 categorías con link a `/catalogo/:categoria`
 `Destacados` — `src/components/home/Destacados.tsx` — carrusel horizontal de `VehiculoCard` con los vehículos `destacado: true`
@@ -54,7 +55,7 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 - `/` — Home (Fase 3: Hero, categorías, destacados, prueba social, CTA)
 - `/catalogo` — Catálogo (Fase 4: buscador, filtros, grilla paginada)
 - `/catalogo/:categoria` — Catálogo, precarga el filtro de categoría (ver decisiones)
-- `/auto/:id` — Página de modelo
+- `/auto/:id` — Página de modelo (Fase 5: galería + lightbox, ficha técnica, descripción, chips de eventos, trabajos realizados, botonera de WhatsApp/consulta/compartir, relacionados)
 - `/nosotros` — Nosotros
 - `/trabajos` — Trabajos
 - `/faq` — FAQ
@@ -95,6 +96,14 @@ Página en `src/pages/Catalogo.tsx`. Buscador (nombre + año, debounce 300ms) + 
 
 ---
 
+## Página de modelo (Fase 5)
+
+Página en `src/pages/Auto.tsx` (ruta `/auto/:id`). Si `getPorId` no encuentra el vehículo, muestra un estado "No encontramos ese vehículo" con link de vuelta al catálogo (no hay redirect automático). Estructura, según el plan: breadcrumb (Catálogo / Categoría / Nombre), `GaleriaVehiculo`, nombre + año + categoría, ficha técnica (capacidad, colores, década si no es `null`, convertible sí/no), descripción larga, chips de tipos de evento (labels desde `data/eventos.ts`), grilla de "Trabajos realizados con este vehículo" (`getTrabajosDeVehiculo`, mismo estilo de card que el strip de trabajos de `PruebaSocial`, linkea a `/trabajos` que todavía es placeholder), botonera (Consultar por WhatsApp, Agregar/Agregado a consulta reutilizando `lib/consulta.ts`, Compartir) y grilla de "Vehículos relacionados" (misma categoría, 3 items, `VehiculoCard` sin acciones).
+
+`npx tsc -b` y `npm run build` corren sin errores. **No se probó en navegador esta sesión**: el usuario, consultado explícitamente, prefirió no instalar Playwright (mismo criterio que en Fase 4).
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -115,6 +124,11 @@ Página en `src/pages/Catalogo.tsx`. Buscador (nombre + año, debounce 300ms) + 
 - **`/catalogo/:categoria` solo precarga el filtro la primera vez**: un `useEffect` copia el param de ruta al query param `categoria` únicamente si este todavía no está seteado en la URL. Si el usuario después deselecciona esa categoría desde el sidebar, la URL sigue mostrando `/catalogo/:categoria` en el path pero los resultados ya no están filtrados por ella — se aceptó esta pequeña inconsistencia de path vs. resultados para no duplicar la fuente de verdad (los query params mandan siempre).
 - **"Agregar a consulta" con persistencia mínima en `localStorage`** (`src/lib/consulta.ts`, clave `consulta-vehiculos`, solo `estaEnConsulta`/`toggleConsulta`). Es el único pedazo de la Fase 6 ("carrito" de consulta múltiple) que se adelantó, porque el plan de Fase 4 pide explícitamente el botón en cada card. No se creó contador visible (badge en Header/StickyBar) ni la página `/consulta` real: eso es contenido de Fase 6.
 - **`VehiculoCard` dejó de ser un único `<Link>` envolviendo toda la tarjeta.** Ahora es un `<div>` con un `<Link className="contents">` alrededor de imagen+datos, y la fila de acciones (Fase 4) queda fuera del link como hermano — necesario porque un `<button>` (Agregar a consulta) no puede anidarse dentro de un `<a>`. El ancho fijo `w-72 shrink-0` que tenía el componente se movió a la prop `className` (ver arriba), así el carrusel de Destacados y la grilla de Catálogo pueden pedir anchos distintos sin bifurcar el componente.
+- **`getRelacionados(vehiculo, cantidad = 3)` agregado a `src/lib/vehiculos.ts`** (Fase 5): reusa `getPorCategoria` y excluye el propio vehículo, siguiendo el mismo patrón que los otros helpers derivados de `VEHICULOS`.
+- **Mensaje de WhatsApp por modelo armado inline en `Auto.tsx`** (Fase 5), mismo criterio que Fase 3/4: no se creó todavía `src/lib/whatsapp.ts` porque el "motor de WhatsApp" formal es Fase 6. La URL absoluta usa `SITE.url` (placeholder hasta definir hosting).
+- **"Compartir" usa Web Share API (`navigator.share`) con fallback a `navigator.clipboard.writeText`** + mensaje "¡Copiado!" temporal (2s) en el mismo botón. No se agregó librería de toast para esto.
+- **Solo 1 foto por vehículo en los datos actuales** (`vehiculos.ts`), así que `GaleriaVehiculo` oculta miniaturas, flechas y contador cuando `imagenes.length === 1` — esa lógica ya está resuelta en el componente, no hace falta tocarla cuando entren fotos reales.
+- **`/auto/:id` con id inexistente no redirige**: muestra un mensaje "No encontramos ese vehículo" con botón de vuelta a `/catalogo`, en vez de reusar `NotFound` (esa página es para rutas que no matchean, esta es para un id inválido dentro de una ruta válida).
 
 ---
 
@@ -122,7 +136,8 @@ Página en `src/pages/Catalogo.tsx`. Buscador (nombre + año, debounce 300ms) + 
 
 - Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render (mencionado en el plan pero no ejecutado aún; necesario para deployar a producción más adelante, sea cual sea el hosting elegido).
 - **Probar el Catálogo (Fase 4) en navegador**: no se hizo esta sesión (ver "Catálogo (Fase 4)" arriba). Verificar buscador con debounce, cada grupo de filtros, drawer mobile, "Ver más vehículos" y el toggle "Agregar a consulta" en desktop y mobile antes de mergear.
-- `Auto`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3) y `Catalogo` (Fase 4) ya tienen contenido real.
+- **Probar la Página de modelo (Fase 5) en navegador**: tampoco se hizo esta sesión (ver "Página de modelo (Fase 5)" arriba). Falta verificar la galería/lightbox (flechas, swipe, teclado) con fotos reales, el botón Compartir en un navegador con y sin Web Share API, y el estado de "vehículo no encontrado".
+- `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `Consulta`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4) y `Auto` (Fase 5) ya tienen contenido real.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).
