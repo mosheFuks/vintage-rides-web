@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 6 — Motor de WhatsApp
-**Próxima fase:** 7 — About + trabajos
-**Rama activa:** `feat/fase-6-whatsapp` (sin mergear a `main` todavía)
+**Última fase completada:** 7 — About + trabajos
+**Próxima fase:** 8 — FAQ + contacto
+**Rama activa:** `feat/fase-7-nosotros-trabajos` (sin mergear a `main` todavía)
 
 ---
 
@@ -20,7 +20,7 @@
 | 4 | Catálogo + buscador + filtros | ✅ hecha | `feat/fase-4-catalogo` | no |
 | 5 | Página de modelo | ✅ hecha | `feat/fase-5-pagina-modelo` | no |
 | 6 | Motor de WhatsApp | ✅ hecha | `feat/fase-6-whatsapp` | no |
-| 7 | About + trabajos | ⬜ pendiente | — | — |
+| 7 | About + trabajos | ✅ hecha | `feat/fase-7-nosotros-trabajos` | no |
 | 8 | FAQ + contacto | ⬜ pendiente | — | — |
 | 9 | SEO + performance + analytics | ⬜ pendiente | — | — |
 | 10 | QA final | ⬜ pendiente | — | — |
@@ -57,8 +57,8 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 - `/catalogo` — Catálogo (Fase 4: buscador, filtros, grilla paginada)
 - `/catalogo/:categoria` — Catálogo, precarga el filtro de categoría (ver decisiones)
 - `/auto/:id` — Página de modelo (Fase 5: galería + lightbox, ficha técnica, descripción, chips de eventos, trabajos realizados, botonera de WhatsApp/consulta/compartir, relacionados)
-- `/nosotros` — Nosotros
-- `/trabajos` — Trabajos
+- `/nosotros` — Nosotros (Fase 7: historia, números y qué incluye el servicio)
+- `/trabajos` — Trabajos (Fase 7: grilla filtrable por tipo de evento y año, modal con vehículos usados)
 - `/faq` — FAQ
 - `/contacto` — Contacto
 - `/consulta` — Consulta (Fase 6: lista de vehículos seleccionados + formulario previo opcional + envío por WhatsApp)
@@ -119,6 +119,18 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 
 ---
 
+## About + Trabajos (Fase 7)
+
+`src/data/about.ts` nuevo: `ABOUT.historia` (3 párrafos placeholder) y `ABOUT.incluye` (lista de qué incluye el alquiler: chofer, traslado, seguro, decoración opcional, asesoramiento). Es contenido de marketing genérico editable, no dato de vehículo — mismo criterio que `SITE.tagline` o la copy de `Hero`/`CtaFinal`.
+
+`src/pages/Nosotros.tsx`: historia + una fila de 3 números (años de trayectoria, vehículos en flota, producciones documentadas) + lista de "Qué incluye el alquiler". El plan pedía un número de "eventos realizados", pero no hay ningún dato real de cuántos eventos se hicieron en 35 años — inventar un número violaría la regla de no inventar contenido, así que se usó `TRABAJOS.length` ("producciones documentadas") como métrica real derivada, mismo criterio que reemplazó los testimonios inventados en Fase 3.
+
+`src/pages/Trabajos.tsx`: grilla de los 6 `TRABAJOS`, filtrable por tipo de evento (chips, solo se muestran los tipos que efectivamente aparecen en los datos) y por año (select, oculto porque hoy los 6 trabajos tienen `anio: null` — la lógica de filtrado ya está armada y se activa sola si en el futuro se carga algún año real). Cada card abre un modal (no ruta propia) con la imagen grande, tipo, año si existe, descripción si existe, y — la relación bidireccional pedida con Fase 5 — la grilla de vehículos usados (`getPorId` sobre `vehiculosIds`, reusando `VehiculoCard`), oculta si el trabajo no tiene ningún vehículo vinculado. El campo `fuente` de `Trabajo` nunca se renderiza (es solo trazabilidad interna, como ya aclaraba su comentario en `types/index.ts`).
+
+`npx tsc -b`, `npm run build` y `npm run lint` corren sin errores/warnings nuevos. **No se probó en navegador esta sesión** (ver "Pendientes y deuda técnica").
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -150,6 +162,9 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - **Botón flotante de WhatsApp solo en desktop** (`WhatsappFlotante`, `hidden lg:flex`): en mobile ese rol ya lo cumple el botón grande de `StickyBar`, no se duplica. Con esto se completa la decisión de Fase 1 de que "la navegación de WhatsApp/consulta vive en el Header" — en la práctica quedó repartida entre Header (contador de consulta), el botón flotante (WhatsApp general en desktop) y StickyBar (ambos en mobile), en vez de meter todo dentro del `<Header>`.
 - **Formulario de `/consulta` sin `<form>` ni validación bloqueante**: los 5 campos (fecha, zona, evento, duración, comentario) son inputs controlados sueltos dentro de un `<div>`, todos opcionales; el botón "Enviar por WhatsApp" es un link (`Button` con `href` + `external`) que recalcula el mensaje en cada render, no un submit.
 - **`WhatsappFlotante` con popover editable (ajuste posterior a la Fase 6)**: en vez de linkear directo a `wa.me`, el botón abre un panel con `textarea` (precargado con `mensajeGeneral()`, editable) + botón "Enviar". Es intencionalmente el único lugar de la app con fondo blanco (el resto del sitio es tema oscuro): pedido explícito para que el popover se sienta "a lo WhatsApp" (blanco, borde y textos en `--color-whatsapp`). El botón "Enviar" se deshabilita visualmente si el mensaje queda vacío. Cierra con Escape, click afuera o al enviar (vía listener de `mousedown`/`keydown` en un `useEffect`, mismo patrón que el lightbox de `GaleriaVehiculo`). Solo se aplicó al botón flotante de desktop, no a `StickyBar` (mobile), que no se tocó.
+- **Trabajos con modal en vez de página propia** (Fase 7): el plan permitía "modal/página"; se eligió modal porque no hace falta una URL individual por trabajo (no hay SEO ni compartir involucrados como sí en `/auto/:id`) y evita crear 6 rutas nuevas para contenido que probablemente crezca poco. El estado del modal es local a `Trabajos.tsx`, no deep-linkeable — si más adelante se quiere compartir un trabajo puntual, se puede sumar un query param sin tocar el resto.
+- **Filtro de año en `/trabajos` construido pero oculto**: como ningún trabajo tiene `anio` cargado todavía, mostrar un `<select>` con una sola opción ("Todos los años") sería un control muerto. Se condicionó su render a que exista al menos un año real en los datos (`aniosDisponibles.length > 0`), mismo criterio que otras partes del sitio esconden secciones vacías en vez de mostrarlas rotas o inventar contenido.
+- **"Eventos realizados" del plan reemplazado por "Producciones documentadas" (`TRABAJOS.length`)** en `/nosotros`: no hay un conteo real de eventos en 35 años de trayectoria en ninguna fuente del proyecto, y la regla de no inventar contenido aplica también a este tipo de números de marketing, no solo a datos de vehículos.
 
 ---
 
@@ -158,8 +173,9 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - Migrar `main.tsx`/`vite.config.ts` a `vite-react-ssg` para habilitar el pre-render (mencionado en el plan pero no ejecutado aún; necesario para deployar a producción más adelante, sea cual sea el hosting elegido).
 - **Probar el Catálogo (Fase 4) en navegador**: no se hizo esta sesión (ver "Catálogo (Fase 4)" arriba). Verificar buscador con debounce, cada grupo de filtros, drawer mobile, "Ver más vehículos" y el toggle "Agregar a consulta" en desktop y mobile antes de mergear.
 - **Probar la Página de modelo (Fase 5) en navegador**: tampoco se hizo esta sesión (ver "Página de modelo (Fase 5)" arriba). Falta verificar la galería/lightbox (flechas, swipe, teclado) con fotos reales, el botón Compartir en un navegador con y sin Web Share API, y el estado de "vehículo no encontrado".
-- **Probar el Motor de WhatsApp (Fase 6) en navegador**: tampoco se hizo esta sesión. Falta verificar: botón flotante desktop vs. StickyBar mobile (que no se pisen/dupliquen), que el contador del Header y StickyBar se actualice en vivo al tocar "Agregar a consulta" desde distintas páginas, el flujo completo de `/consulta` (agregar varios, completar el formulario opcional, confirmar el texto final que llega a WhatsApp) y que la consulta efectivamente se pierda al cerrar la pestaña (por el cambio a `sessionStorage`).
-- `Nosotros`, `Trabajos`, `Faq`, `Contacto`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4), `Auto` (Fase 5) y `Consulta` (Fase 6) ya tienen contenido real.
+- **Probar el Motor de WhatsApp (Fase 6) en navegador**: tampoco se hizo esta sesión. Falta verificar: botón flotante desktop (incluido el popover editable) vs. StickyBar mobile (que no se pisen/dupliquen), que el contador del Header y StickyBar se actualice en vivo al tocar "Agregar a consulta" desde distintas páginas, el flujo completo de `/consulta` (agregar varios, completar el formulario opcional, confirmar el texto final que llega a WhatsApp) y que la consulta efectivamente se pierda al cerrar la pestaña (por el cambio a `sessionStorage`).
+- **Probar Nosotros y Trabajos (Fase 7) en navegador**: tampoco se hizo esta sesión. Falta verificar la grilla y los filtros de `/trabajos` (chips de tipo, que el select de año se mantenga oculto), el modal (abrir/cerrar con click afuera/Escape/botón X) y que el trabajo con vehículo vinculado (`diarios-de-motocicleta`) muestre bien la card de `VehiculoCard` dentro del modal.
+- `Faq`, `Contacto`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4), `Auto` (Fase 5), `Consulta` (Fase 6), `Nosotros` y `Trabajos` (Fase 7) ya tienen contenido real.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).
