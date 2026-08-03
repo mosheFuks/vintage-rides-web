@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 7 — About + trabajos
-**Próxima fase:** 8 — FAQ + contacto
-**Rama activa:** `feat/fase-7-nosotros-trabajos` (sin mergear a `main` todavía)
+**Última fase completada:** 8 — FAQ + contacto
+**Próxima fase:** 9 — SEO + performance + analytics
+**Rama activa:** `feat/fase-8-faq-contacto` (sin mergear a `main` todavía)
 
 ---
 
@@ -21,7 +21,7 @@
 | 5 | Página de modelo | ✅ hecha | `feat/fase-5-pagina-modelo` | no |
 | 6 | Motor de WhatsApp | ✅ hecha | `feat/fase-6-whatsapp` | no |
 | 7 | About + trabajos | ✅ hecha | `feat/fase-7-nosotros-trabajos` | no |
-| 8 | FAQ + contacto | ⬜ pendiente | — | — |
+| 8 | FAQ + contacto | ✅ hecha | `feat/fase-8-faq-contacto` | no |
 | 9 | SEO + performance + analytics | ⬜ pendiente | — | — |
 | 10 | QA final | ⬜ pendiente | — | — |
 
@@ -59,8 +59,8 @@ Definidas en `src/App.tsx` con `react-router-dom` (`BrowserRouter` en `src/main.
 - `/auto/:id` — Página de modelo (Fase 5: galería + lightbox, ficha técnica, descripción, chips de eventos, trabajos realizados, botonera de WhatsApp/consulta/compartir, relacionados)
 - `/nosotros` — Nosotros (Fase 7: historia, números y qué incluye el servicio)
 - `/trabajos` — Trabajos (Fase 7: grilla filtrable por tipo de evento y año, modal con vehículos usados)
-- `/faq` — FAQ
-- `/contacto` — Contacto
+- `/faq` — FAQ (Fase 8: acordeón con las 8 preguntas base)
+- `/contacto` — Contacto (Fase 8: datos, horarios, botón de WhatsApp y mapa embebido)
 - `/consulta` — Consulta (Fase 6: lista de vehículos seleccionados + formulario previo opcional + envío por WhatsApp)
 - `*` — NotFound
 
@@ -131,6 +131,18 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 
 ---
 
+## FAQ + Contacto (Fase 8)
+
+`SITE.horarios` nuevo en `src/config/site.ts` ("Lunes a sábado de 9 a 19 hs", placeholder editable), siguiendo el criterio de que `site.ts` es la única fuente de datos del negocio.
+
+`src/data/faq.ts` nuevo: `FAQS` (8 preguntas/respuestas, las mismas del plan, con respuestas placeholder genéricas y no comprometidas — p. ej. "consultanos por WhatsApp" en vez de inventar un mínimo de horas o un monto de seña concretos). `src/pages/Faq.tsx` es un acordeón simple (una pregunta abierta a la vez, la primera abierta por defecto), sin librería nueva.
+
+`src/pages/Contacto.tsx`: card con email/dirección/horarios (iconos de `lucide-react`), botón "Consultar por WhatsApp" (mismo `lib/whatsapp.ts` de Fase 6) y un mapa embebido con `<iframe>` de Google Maps (`google.com/maps?q=...&output=embed`, sin API key) centrado en `SITE.direccion` — no hace falta clave ni librería para un embed simple de solo lectura.
+
+`npx tsc -b`, `npm run build` y `npm run lint` corren sin errores/warnings nuevos. **No se probó en navegador esta sesión** (ver "Pendientes y deuda técnica").
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -165,6 +177,8 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - **Trabajos con modal en vez de página propia** (Fase 7): el plan permitía "modal/página"; se eligió modal porque no hace falta una URL individual por trabajo (no hay SEO ni compartir involucrados como sí en `/auto/:id`) y evita crear 6 rutas nuevas para contenido que probablemente crezca poco. El estado del modal es local a `Trabajos.tsx`, no deep-linkeable — si más adelante se quiere compartir un trabajo puntual, se puede sumar un query param sin tocar el resto.
 - **Filtro de año en `/trabajos` construido pero oculto**: como ningún trabajo tiene `anio` cargado todavía, mostrar un `<select>` con una sola opción ("Todos los años") sería un control muerto. Se condicionó su render a que exista al menos un año real en los datos (`aniosDisponibles.length > 0`), mismo criterio que otras partes del sitio esconden secciones vacías en vez de mostrarlas rotas o inventar contenido.
 - **"Eventos realizados" del plan reemplazado por "Producciones documentadas" (`TRABAJOS.length`)** en `/nosotros`: no hay un conteo real de eventos en 35 años de trayectoria en ninguna fuente del proyecto, y la regla de no inventar contenido aplica también a este tipo de números de marketing, no solo a datos de vehículos.
+- **Respuestas de FAQ deliberadamente sin comprometer números concretos** (mínimo de horas, monto de seña, recargo por zona): ninguno de esos datos existe en las fuentes del proyecto, así que las respuestas derivan la conversación a WhatsApp en vez de inventar una cifra. Mismo criterio de "no inventar" aplicado a texto de política, no solo a datos de vehículos.
+- **Mapa de `/contacto` con `<iframe>` de Google Maps sin API key** (`google.com/maps?q=...&output=embed`), apuntado a `SITE.direccion` (hoy "Villa Devoto, CABA", un valor genérico de zona, no una dirección real del cliente). Se prefirió esto a integrar una librería de mapas (Leaflet, Google Maps JS SDK) por ser "mapa embebido simple", tal cual pide el plan.
 
 ---
 
@@ -175,7 +189,8 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - **Probar la Página de modelo (Fase 5) en navegador**: tampoco se hizo esta sesión (ver "Página de modelo (Fase 5)" arriba). Falta verificar la galería/lightbox (flechas, swipe, teclado) con fotos reales, el botón Compartir en un navegador con y sin Web Share API, y el estado de "vehículo no encontrado".
 - **Probar el Motor de WhatsApp (Fase 6) en navegador**: tampoco se hizo esta sesión. Falta verificar: botón flotante desktop (incluido el popover editable) vs. StickyBar mobile (que no se pisen/dupliquen), que el contador del Header y StickyBar se actualice en vivo al tocar "Agregar a consulta" desde distintas páginas, el flujo completo de `/consulta` (agregar varios, completar el formulario opcional, confirmar el texto final que llega a WhatsApp) y que la consulta efectivamente se pierda al cerrar la pestaña (por el cambio a `sessionStorage`).
 - **Probar Nosotros y Trabajos (Fase 7) en navegador**: tampoco se hizo esta sesión. Falta verificar la grilla y los filtros de `/trabajos` (chips de tipo, que el select de año se mantenga oculto), el modal (abrir/cerrar con click afuera/Escape/botón X) y que el trabajo con vehículo vinculado (`diarios-de-motocicleta`) muestre bien la card de `VehiculoCard` dentro del modal.
-- `Faq`, `Contacto`, `NotFound` siguen siendo placeholders sin contenido real. `Home` (Fase 3), `Catalogo` (Fase 4), `Auto` (Fase 5), `Consulta` (Fase 6), `Nosotros` y `Trabajos` (Fase 7) ya tienen contenido real.
+- **Probar FAQ y Contacto (Fase 8) en navegador**: tampoco se hizo esta sesión. Falta verificar el acordeón de `/faq` (que abra/cierre bien, que solo una pregunta quede abierta a la vez) y que el `<iframe>` de Google Maps en `/contacto` cargue correctamente (algunos entornos/red corporativa bloquean `google.com/maps` embebido).
+- `NotFound` sigue siendo el único placeholder sin contenido real. Todas las demás páginas (`Home`, `Catalogo`, `Auto`, `Consulta`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`) ya tienen contenido real.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).
