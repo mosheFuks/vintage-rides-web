@@ -4,6 +4,7 @@ import { SectionTitle } from "../components/ui/SectionTitle";
 import { ABOUT } from "../data/about";
 import { VEHICULOS } from "../data/vehiculos";
 import { TRABAJOS } from "../data/trabajos";
+import { Seo } from "../lib/seo";
 
 const ANIOS_TRAYECTORIA = new Date().getFullYear() - 1991;
 
@@ -16,6 +17,11 @@ const STATS = [
 export function Nosotros() {
   return (
     <Container className="py-16 lg:py-20">
+      <Seo
+        title="Quiénes somos"
+        description="Conocé la historia, la trayectoria y qué incluye el alquiler de nuestra flota de vehículos de colección."
+        path="/nosotros"
+      />
       <SectionTitle eyebrow="Nosotros" title="Quiénes somos" />
 
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-[2fr_1fr]">

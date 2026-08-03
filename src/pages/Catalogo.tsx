@@ -13,6 +13,8 @@ import {
   getColoresDisponibles,
   getDecadasDisponibles,
 } from "../lib/vehiculos";
+import { Seo } from "../lib/seo";
+import { trackEvent } from "../lib/analytics";
 import type { CategoriaId, TipoEvento } from "../types";
 
 const LOTE = 24;
@@ -45,8 +47,12 @@ export function Catalogo() {
   useEffect(() => {
     const id = setTimeout(() => {
       const next = new URLSearchParams(searchParams);
-      if (textoInput) next.set("q", textoInput);
-      else next.delete("q");
+      if (textoInput) {
+        next.set("q", textoInput);
+        trackEvent("busqueda", { termino: textoInput });
+      } else {
+        next.delete("q");
+      }
       setSearchParams(next, { replace: true });
     }, 300);
     return () => clearTimeout(id);
@@ -112,6 +118,10 @@ export function Catalogo() {
   const categoriaUnica =
     categorias.length === 1 ? CATEGORIAS.find((c) => c.id === categorias[0]) : undefined;
 
+  // Se deriva del param de ruta (no del query param, que recién se completa en un useEffect)
+  // para que el título/description queden correctos en el HTML prerenderizado de cada categoría.
+  const categoriaSeo = categoriaRuta ? CATEGORIAS.find((c) => c.id === categoriaRuta) : undefined;
+
   const propsFiltros = {
     categorias,
     onToggleCategoria: (id: CategoriaId) => toggleEnLista("categoria", id),
@@ -142,6 +152,15 @@ export function Catalogo() {
 
   return (
     <Container className="py-16 lg:py-20">
+      <Seo
+        title={categoriaSeo ? categoriaSeo.nombre : "Catálogo"}
+        description={
+          categoriaSeo
+            ? categoriaSeo.descripcion
+            : "Catálogo completo de vehículos de colección para alquiler: antiguos, clásicos, limousinas, motos y más."
+        }
+        path={categoriaSeo ? `/catalogo/${categoriaSeo.id}` : "/catalogo"}
+      />
       <SectionTitle
         eyebrow="Flota"
         title={categoriaUnica ? categoriaUnica.nombre : "Catálogo"}

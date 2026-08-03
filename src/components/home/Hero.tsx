@@ -4,6 +4,7 @@ import { SITE } from "../../config/site";
 import { VEHICULOS } from "../../data/vehiculos";
 import { CATEGORIAS } from "../../data/categorias";
 import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
+import { trackEvent } from "../../lib/analytics";
 
 const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
@@ -27,7 +28,12 @@ export function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <Button href="/catalogo">Ver catálogo</Button>
-          <Button href={WHATSAPP_HREF} external variant="whatsapp">
+          <Button
+            href={WHATSAPP_HREF}
+            external
+            variant="whatsapp"
+            onClick={() => trackEvent("whatsapp_general")}
+          >
             Consultar por WhatsApp
           </Button>
         </div>

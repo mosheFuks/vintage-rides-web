@@ -8,9 +8,12 @@ import { GaleriaVehiculo } from "../components/vehiculos/GaleriaVehiculo";
 import { VehiculoCard } from "../components/vehiculos/VehiculoCard";
 import { CATEGORIAS } from "../data/categorias";
 import { EVENTOS } from "../data/eventos";
-import { getPorId, getRelacionados, getTrabajosDeVehiculo } from "../lib/vehiculos";
+import { getPorId, getRelacionados, getTrabajosDeVehiculo, nombreConAnio } from "../lib/vehiculos";
 import { useConsulta } from "../lib/consulta";
 import { armarUrlWhatsapp, mensajeModelo, urlVehiculo } from "../lib/whatsapp";
+import { Seo } from "../lib/seo";
+import { trackEvent } from "../lib/analytics";
+import { SITE } from "../config/site";
 import type { Vehiculo } from "../types";
 
 export function Auto() {
@@ -59,6 +62,22 @@ function FichaVehiculo({ vehiculo }: { vehiculo: Vehiculo }) {
 
   return (
     <Container className="py-12 lg:py-16">
+      <Seo
+        title={nombreConAnio(vehiculo)}
+        description={vehiculo.descripcionCorta}
+        path={`/auto/${vehiculo.id}`}
+        imagen={vehiculo.imagenes[0]}
+        tipo="product"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: vehiculo.nombre,
+          description: vehiculo.descripcionLarga,
+          image: `${SITE.url}${vehiculo.imagenes[0]}`,
+          category: categoria?.nombre,
+          url: `${SITE.url}/auto/${vehiculo.id}`,
+        }}
+      />
       <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-texto-secundario">
         <Link to="/catalogo" className="hover:text-acento">
           Catálogo
@@ -139,12 +158,21 @@ function FichaVehiculo({ vehiculo }: { vehiculo: Vehiculo }) {
           )}
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button variant="whatsapp" href={whatsappHref} external className="flex-1">
+            <Button
+              variant="whatsapp"
+              href={whatsappHref}
+              external
+              className="flex-1"
+              onClick={() => trackEvent("whatsapp_modelo", { id: vehiculo.id })}
+            >
               Consultar por WhatsApp
             </Button>
             <Button
               variant={enConsulta ? "outline" : "primary"}
-              onClick={() => toggleConsulta(vehiculo.id)}
+              onClick={() => {
+                if (!enConsulta) trackEvent("agregar_consulta", { id: vehiculo.id });
+                toggleConsulta(vehiculo.id);
+              }}
               className="flex-1"
             >
               {enConsulta ? <Check className="size-4" /> : <Plus className="size-4" />}

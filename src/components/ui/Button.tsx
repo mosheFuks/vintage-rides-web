@@ -19,7 +19,8 @@ interface ButtonAsButton extends BaseProps {
 interface ButtonAsLink extends BaseProps {
   href: string;
   external?: boolean;
-  onClick?: undefined;
+  /** No bloquea la navegación: útil para trackear el click (ej. analytics) antes de salir. */
+  onClick?: () => void;
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
@@ -43,14 +44,20 @@ export function Button({ children, variant = "primary", className = "", ...props
   if ("href" in props && props.href) {
     if (props.external) {
       return (
-        <a href={props.href} className={classes} target="_blank" rel="noopener noreferrer">
+        <a
+          href={props.href}
+          className={classes}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={props.onClick}
+        >
           {icon}
           {children}
         </a>
       );
     }
     return (
-      <Link to={props.href} className={classes}>
+      <Link to={props.href} className={classes} onClick={props.onClick}>
         {icon}
         {children}
       </Link>

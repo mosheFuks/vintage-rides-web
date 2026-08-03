@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, Send, X } from "lucide-react";
 import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
+import { trackEvent } from "../../lib/analytics";
 
 export function WhatsappFlotante() {
   const [abierto, setAbierto] = useState(false);
@@ -62,6 +63,7 @@ export function WhatsappFlotante() {
                 e.preventDefault();
                 return;
               }
+              trackEvent("whatsapp_general");
               setAbierto(false);
             }}
             className={`mt-3 flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium tracking-wide uppercase transition-colors duration-200 ${

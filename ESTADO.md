@@ -3,9 +3,9 @@
 > Este archivo lo actualiza Claude Code al final de cada fase.
 > Es la memoria entre sesiones: si está bien escrito, no hace falta explorar el proyecto.
 
-**Última fase completada:** 8 — FAQ + contacto
-**Próxima fase:** 9 — SEO + performance + analytics
-**Rama activa:** `feat/fase-8-faq-contacto` (sin mergear a `main` todavía)
+**Última fase completada:** 9 — SEO + performance + analytics
+**Próxima fase:** 10 — QA final
+**Rama activa:** `feat/fase-9-seo-performance-analytics` (sin mergear a `main` todavía)
 
 ---
 
@@ -22,7 +22,7 @@
 | 6 | Motor de WhatsApp | ✅ hecha | `feat/fase-6-whatsapp` | no |
 | 7 | About + trabajos | ✅ hecha | `feat/fase-7-nosotros-trabajos` | no |
 | 8 | FAQ + contacto | ✅ hecha | `feat/fase-8-faq-contacto` | no |
-| 9 | SEO + performance + analytics | ⬜ pendiente | — | — |
+| 9 | SEO + performance + analytics | ✅ hecha (parcial, ver detalle) | `feat/fase-9-seo-performance-analytics` | no |
 | 10 | QA final | ⬜ pendiente | — | — |
 
 ---
@@ -143,6 +143,32 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 
 ---
 
+## SEO + Performance + Analytics (Fase 9)
+
+**SSG con `vite-react-ssg` — migración completa.** `src/main.tsx` ahora exporta `createRoot` desde `ViteReactSSG({ routes, basename })` en vez de montar `createRoot()` + `BrowserRouter` a mano. `src/App.tsx` se eliminó: sus rutas pasaron a `src/routes.tsx` como un árbol `RouteRecord[]` (formato data-router de react-router). `Layout` (`src/components/layout/Layout.tsx`) dejó de recibir `children` y ahora es el `Component` de la ruta raíz `/`, usa `<Outlet />` para las rutas hijas, y es donde vive `<ConsultaProvider>` (antes estaba en `main.tsx`; con rutas basadas en objetos ya no hay un único punto de montaje JSX para envolver, así que el layout raíz es el lugar natural). Cada página se carga con `lazy: () => import('./pages/X').then(m => ({ Component: m.X }))` — es el mecanismo de code-splitting por ruta que pedía el plan ("lazy loading de rutas"), nativo de `vite-react-ssg`/react-router en vez de envolver a mano con `React.lazy`. `/auto/:id` y `/catalogo/:categoria` tienen `getStaticPaths` que devuelven, respectivamente, los 206 ids de `vehiculos.ts` y los 8 ids de `categorias.ts`, para que **todas** se prerendericen.
+
+`npm run build` ahora corre `tsc -b && vite-react-ssg build` (antes `vite build`). `npm run dev` se dejó como `vite` puro (CSR), sin cambios: `vite-react-ssg` detecta que corre en el navegador y monta la app igual (confirmado con `curl` contra el dev server), así que el flujo de desarrollo de todas las fases anteriores sigue funcionando idéntico. Se probó con `npm run build` real: **221 páginas generadas** (7 estáticas + 8 categorías + 206 vehículos), verificado contando carpetas en `dist/auto` y `dist/catalogo`.
+
+**`ssgOptions.dirStyle: 'nested'`** en `vite.config.ts` (`/auto/hupmobile-1930` → `dist/auto/hupmobile-1930/index.html`, no `.html` en la URL) para cumplir "URLs limpias, sin `.html`". **Ojo:** `vite preview` local necesita la barra final (`/auto/hupmobile-1930/`) para resolver el archivo anidado correctamente; sin la barra devuelve el `index.html` de la raíz. Es una particularidad del preview server de Vite, no del build — los hosts estáticos típicos (Netlify, GitHub Pages, Vercel) resuelven `carpeta/` automáticamente. A verificar contra el hosting real una vez que se decida (Fase 10 ya lo tiene en su checklist).
+
+**Meta tags y JSON-LD:** `src/lib/seo.tsx` exporta `<Seo>` (envuelve `<Head>` de `vite-react-ssg`, que es un wrapper de `react-helmet-async`): `title`, `description`, `canonical`, Open Graph, Twitter card y, opcionalmente, un bloque `jsonLd` y/o `noindex`. Se agregó a las 9 páginas: `LocalBusiness` en Home, `Product` en cada `Auto` (imagen, categoría, descripción larga), `FAQPage` en Faq (las 8 preguntas). `Consulta` y `NotFound` llevan `noindex` (contenido personal/sin valor de búsqueda). Verificado con `vite preview` + `curl`/`grep` sobre los archivos generados: title, description, og:image y JSON-LD correctos y **distintos por ruta** (antes de la corrección de abajo, todas las páginas mostraban el `<title>` de Home).
+
+**Bug encontrado y corregido en el proceso:** el `index.html` original tenía `<title>` y `<meta name="description">` estáticos que `vite-react-ssg` no reemplaza (los agrega el `Head` de cada página, pero no borra los del template), así que cada página prerenderizada terminaba con **dos** `<title>` (uno correcto de Helmet, uno viejo de `index.html`, ver commit). Se sacaron esas dos líneas de `index.html`: ahora el título/description siempre viene del `<Seo>` de cada página, sin duplicados. Confirmado en el HTML generado tras el fix.
+
+**Segundo bug encontrado (más importante, afecta contenido real no solo SEO): duplicación de año en el nombre.** Varios vehículos ya tienen el año adentro del campo `nombre` (ej. `"Hupmobile 1930"`, `"Ford A 1930 Bordo 4 Puertas"`), pero desde Fase 6 `lib/whatsapp.ts` armaba `"{nombre} {año}"` sin chequear eso, así que el mensaje de WhatsApp decía **"Hupmobile 1930 1930"**. Se detectó al verificar el `<title>` prerenderizado de esa página. Fix: `nombreConAnio(vehiculo)` (nuevo, en `src/lib/vehiculos.ts`) solo agrega el año si el nombre todavía no lo incluye (`nombre.includes(String(anio))`); `lib/whatsapp.ts` y el título de `Seo` en `Auto.tsx` ahora usan ese único helper. Esto corrige tanto los mensajes de WhatsApp (Fase 6) como los títulos SEO (Fase 9) — mismo bug, dos síntomas.
+
+**Sitemap y robots.txt:** no genera nada `vite-react-ssg` por sí solo, así que se agregó `ssgOptions.onFinished` en `vite.config.ts` (recibe el directorio de salida ya con todas las páginas escritas) que arma `sitemap.xml` (221 URLs, mismas rutas que `getStaticPaths` + las estáticas) y `robots.txt` (permite todo, apunta al sitemap) usando `SITE.url`. Como `SITE.url` sigue en `http://localhost:5173`, ambos archivos quedan apuntando a localhost hasta que se defina el dominio real — mismo criterio ya anotado en el plan.
+
+**`lang="es"`** corregido en `index.html` (estaba en `"en"`). Charset UTF-8 ya estaba bien.
+
+**Analytics:** `src/lib/analytics.ts` — `trackEvent(nombre, props?)`, no-op si `window.plausible` no existe (SSR-safe: `typeof window === "undefined"` corta antes). Se agregó el script de Plausible a `index.html` (`data-domain="localhost"`, placeholder — **no hay cuenta de Plausible real creada**, es solo la integración de código; el script no va a mandar datos a ningún lado útil hasta que se registre un dominio real ahí, tal como pasa con `SITE.url`). Se cablearon los 5 eventos pedidos por el plan: `whatsapp_general` (Hero, CtaFinal, StickyBar, WhatsappFlotante, Contacto), `whatsapp_modelo` con `id` (botón WhatsApp de `Auto`), `whatsapp_multiple` con `cantidad` (botón "Enviar por WhatsApp" de `Consulta`), `agregar_consulta` con `id` (solo al agregar, no al quitar — en `VehiculoCard` y `Auto`), `busqueda` con `termino` (en el debounce del buscador de `Catalogo`, solo cuando hay texto). `Button` (`src/components/ui/Button.tsx`) se extendió para aceptar `onClick` también en modo link (antes era mutuamente excluyente con `href`): no bloquea la navegación, solo dispara el tracking antes de salir.
+
+**Performance — parcial, a propósito.** Lo que pedía el plan de imágenes (WebP, `loading="lazy"`, `width`/`height` explícitos, blur placeholder) **no se hizo esta sesión**: todo el sitio usa `background-image` en vez de `<img>` (decisión de Fase 3, ver más abajo) precisamente porque no hay fotos reales todavía — convertir a WebP algo que no existe, o agregar `loading="lazy"` a un `<img>` que no se usa en ningún lado, no tiene sentido todavía. Es un cambio grande (toca `VehiculoCard`, `GaleriaVehiculo`, `Hero`, `CategoriasGrid`, `Destacados`, `PruebaSocial`, `Trabajos`, `Consulta`) que además revertiría esa decisión de Fase 3, así que se dejó pendiente explícitamente para cuando lleguen las fotos reales, en vez de improvisar una migración a medias. Lo que sí se hizo de Performance: lazy loading de rutas (ver arriba) y `dirStyle: nested` para URLs limpias.
+
+`npx tsc -b`, `npm run build` (con el pipeline real de SSG) y `npm run lint` corren sin errores/warnings nuevos.
+
+---
+
 ## Decisiones tomadas
 
 - **Enrutamiento actual con `react-router-dom` + `BrowserRouter` puro, no con `vite-react-ssg`.** La librería `vite-react-ssg` está en `package.json` (fase 0) pero todavía no está conectada: `src/main.tsx` usa `createRoot` + `BrowserRouter` normal y `vite.config.ts` no tiene `ssgOptions`. Falta migrar el entry point para que el sitio se pre-renderice como estático (necesario para SEO y OG previews en WhatsApp sin importar el hosting final). Pendiente para una fase posterior (probablemente antes de fase 9/10).
@@ -179,6 +205,10 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - **"Eventos realizados" del plan reemplazado por "Producciones documentadas" (`TRABAJOS.length`)** en `/nosotros`: no hay un conteo real de eventos en 35 años de trayectoria en ninguna fuente del proyecto, y la regla de no inventar contenido aplica también a este tipo de números de marketing, no solo a datos de vehículos.
 - **Respuestas de FAQ deliberadamente sin comprometer números concretos** (mínimo de horas, monto de seña, recargo por zona): ninguno de esos datos existe en las fuentes del proyecto, así que las respuestas derivan la conversación a WhatsApp en vez de inventar una cifra. Mismo criterio de "no inventar" aplicado a texto de política, no solo a datos de vehículos.
 - **Mapa de `/contacto` con `<iframe>` de Google Maps sin API key** (`google.com/maps?q=...&output=embed`), apuntado a `SITE.direccion` (hoy "Villa Devoto, CABA", un valor genérico de zona, no una dirección real del cliente). Se prefirió esto a integrar una librería de mapas (Leaflet, Google Maps JS SDK) por ser "mapa embebido simple", tal cual pide el plan.
+- **`ConsultaProvider` se movió de `main.tsx` a `Layout`** (Fase 9): con rutas basadas en objetos (`RouteRecord[]`) ya no hay un único árbol JSX en `main.tsx` para envolver con el provider: el layout raíz (`Component` de la ruta `/`, con `<Outlet />`) es ahora ese punto único, ya que envuelve a todas las páginas por diseño.
+- **Performance de imágenes (WebP, lazy, blur) explícitamente no implementada en Fase 9**: bloqueada por la falta de fotos reales (ver detalle arriba). No se trató como "no aplica y listo": quedó registrada como pendiente concreta a retomar cuando el cliente entregue las fotos.
+- **`nombreConAnio()` centralizado en `lib/vehiculos.ts`**: corrige un bug de Fase 6 (duplicaba el año cuando ya estaba en el nombre, ej. "Hupmobile 1930 1930") que afectaba tanto los mensajes de WhatsApp como los títulos SEO nuevos de Fase 9. Un solo helper para las dos fases, en vez de mantener la lógica duplicada e inconsistente que había.
+- **`index.html` sin `<title>`/`<meta description>` estáticos** (Fase 9): los ponía cada página vía `Head`, pero `vite-react-ssg` no borra lo que ya está en el template, así que quedaban duplicados en el HTML prerenderizado. Se sacaron del `index.html`; ahora el único título/description válido es el que arma `src/lib/seo.tsx` por ruta.
 
 ---
 
@@ -191,6 +221,11 @@ Botón general de WhatsApp: `WhatsappFlotante` (nuevo, solo desktop) + el ya exi
 - **Probar Nosotros y Trabajos (Fase 7) en navegador**: tampoco se hizo esta sesión. Falta verificar la grilla y los filtros de `/trabajos` (chips de tipo, que el select de año se mantenga oculto), el modal (abrir/cerrar con click afuera/Escape/botón X) y que el trabajo con vehículo vinculado (`diarios-de-motocicleta`) muestre bien la card de `VehiculoCard` dentro del modal.
 - **Probar FAQ y Contacto (Fase 8) en navegador**: tampoco se hizo esta sesión. Falta verificar el acordeón de `/faq` (que abra/cierre bien, que solo una pregunta quede abierta a la vez) y que el `<iframe>` de Google Maps en `/contacto` cargue correctamente (algunos entornos/red corporativa bloquean `google.com/maps` embebido).
 - `NotFound` sigue siendo el único placeholder sin contenido real. Todas las demás páginas (`Home`, `Catalogo`, `Auto`, `Consulta`, `Nosotros`, `Trabajos`, `Faq`, `Contacto`) ya tienen contenido real.
+- **Imágenes en WebP + `loading="lazy"` + `width`/`height` + blur placeholder (pendiente de Fase 9)**: bloqueado hasta tener fotos reales de los 206 vehículos, ver "SEO + Performance + Analytics (Fase 9)" arriba. Cuando lleguen las fotos, van a hacer falta dos cosas a la vez: las fotos en sí, y decidir si se vuelve a `<img>` (para poder usar `loading="lazy"`/`width`/`height` de verdad) o si se mantiene `background-image` y se busca otra forma de lazy-load.
+- **`Lighthouse ≥ 90 Performance / ≥ 95 SEO-Accesibilidad` (objetivo de Fase 9) no medido esta sesión**: no se corrió Lighthouse (no hay navegador disponible, ver nota de Playwright). Correrlo cuando haya forma de abrir el sitio en un Chrome real, idealmente ya con fotos reales cargadas.
+- **Cuenta de Plausible real**: el script está integrado en `index.html` pero con `data-domain="localhost"` (placeholder). No va a registrar datos hasta que exista una cuenta de Plausible con el dominio real configurado — actualizar junto con `SITE.url` cuando se defina el hosting.
+- **Alerta para la Fase 10 (checklist de marca):** el plan pide que `grep -ri "hupmobile.com.ar" .` devuelva 0 resultados, pero `src/data/trabajos.ts` ya tiene varias URLs `https://hupmobile.com.ar/...` en el campo `fuente` (agregadas en Fase 2, documentadas como "solo trazabilidad interna, no se muestra en UI"). Hoy no se renderizan en ningún lado (confirmado en Fase 7), pero técnicamente SÍ están en el código fuente, así que ese grep del checklist va a encontrarlas. Decidir en Fase 10 si se borra el campo `fuente` de esos 4 registros o si se ajusta el criterio del checklist — no se tocó esta sesión porque es una decisión de la fase de QA, no de SEO.
+- **Probar el sitio prerenderizado (Fase 9) en un navegador real**: se verificó todo con `curl`/`grep` sobre los archivos generados y con `vite preview`, pero no se abrió visualmente. Falta confirmar que la hidratación del lado del cliente funciona sin errores de consola (mismatch de SSR vs cliente) en las 221 páginas, especialmente en `/auto/:id` y `/catalogo/:categoria` que dependen de `getStaticPaths`.
 - Faltan las fotos reales de los 206 vehículos, las 8 categorías, los 6 trabajos y una imagen de hero para la Home (ver `PENDIENTES-CLIENTE.md`).
 - Revisar con el cliente los 10 posibles duplicados/datos inciertos listados en `PENDIENTES-CLIENTE.md`.
 - Definir `capacidad` y `eventos` reales por vehículo (hoy son estimaciones conservadoras por categoría).

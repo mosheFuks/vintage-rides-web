@@ -4,12 +4,19 @@ import { SectionTitle } from "../components/ui/SectionTitle";
 import { Button } from "../components/ui/Button";
 import { SITE } from "../config/site";
 import { armarUrlWhatsapp, mensajeGeneral } from "../lib/whatsapp";
+import { Seo } from "../lib/seo";
+import { trackEvent } from "../lib/analytics";
 
 const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
 export function Contacto() {
   return (
     <Container className="py-16 lg:py-20">
+      <Seo
+        title="Contacto"
+        description={`Escribinos por WhatsApp o visitanos en ${SITE.direccion}. Horario de atención: ${SITE.horarios}.`}
+        path="/contacto"
+      />
       <SectionTitle
         eyebrow="Contacto"
         title="Hablemos de tu evento"
@@ -36,7 +43,13 @@ export function Contacto() {
             </span>
           </div>
 
-          <Button variant="whatsapp" href={WHATSAPP_HREF} external className="w-full sm:w-fit">
+          <Button
+            variant="whatsapp"
+            href={WHATSAPP_HREF}
+            external
+            className="w-full sm:w-fit"
+            onClick={() => trackEvent("whatsapp_general")}
+          >
             Consultar por WhatsApp
           </Button>
         </div>

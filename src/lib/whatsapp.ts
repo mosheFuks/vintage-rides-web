@@ -1,5 +1,6 @@
 import { SITE } from "../config/site";
 import { EVENTOS } from "../data/eventos";
+import { nombreConAnio } from "./vehiculos";
 import type { TipoEvento, Vehiculo } from "../types";
 
 const MENSAJE_GENERAL = "Hola! Te quería hacer una consulta sobre el alquiler de autos.";
@@ -22,10 +23,6 @@ export function urlVehiculo(id: string): string {
 
 export function mensajeGeneral(): string {
   return MENSAJE_GENERAL;
-}
-
-function nombreConAnio(vehiculo: Vehiculo): string {
-  return vehiculo.anio ? `${vehiculo.nombre} ${vehiculo.anio}` : vehiculo.nombre;
 }
 
 export function mensajeModelo(vehiculo: Vehiculo): string {

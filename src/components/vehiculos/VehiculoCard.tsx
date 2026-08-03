@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Users, Check, Plus } from "lucide-react";
 import type { Vehiculo } from "../../types";
 import { useConsulta } from "../../lib/consulta";
+import { trackEvent } from "../../lib/analytics";
 
 interface VehiculoCardProps {
   vehiculo: Vehiculo;
@@ -51,7 +52,10 @@ export function VehiculoCard({ vehiculo, mostrarAcciones = false, className = ""
           </Link>
           <button
             type="button"
-            onClick={() => toggleConsulta(vehiculo.id)}
+            onClick={() => {
+              if (!enConsulta) trackEvent("agregar_consulta", { id: vehiculo.id });
+              toggleConsulta(vehiculo.id);
+            }}
             className={`flex flex-1 items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs font-medium tracking-wide uppercase transition-colors duration-200 ${
               enConsulta
                 ? "bg-acento/10 text-acento"

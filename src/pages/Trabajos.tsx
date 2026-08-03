@@ -6,6 +6,7 @@ import { VehiculoCard } from "../components/vehiculos/VehiculoCard";
 import { TRABAJOS } from "../data/trabajos";
 import { EVENTOS } from "../data/eventos";
 import { getPorId } from "../lib/vehiculos";
+import { Seo } from "../lib/seo";
 import type { Trabajo, TipoEvento } from "../types";
 
 const tiposDisponibles = [...new Set(TRABAJOS.map((t) => t.tipo))];
@@ -39,6 +40,11 @@ export function Trabajos() {
 
   return (
     <Container className="py-16 lg:py-20">
+      <Seo
+        title="Trabajos realizados"
+        description="Cine, publicidad, turismo y eventos donde estuvo presente la flota de vehículos de colección."
+        path="/trabajos"
+      />
       <SectionTitle
         eyebrow="Producciones"
         title="Trabajos realizados"

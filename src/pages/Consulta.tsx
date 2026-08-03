@@ -7,6 +7,8 @@ import { Button } from "../components/ui/Button";
 import { getPorId } from "../lib/vehiculos";
 import { useConsulta } from "../lib/consulta";
 import { armarUrlWhatsapp, mensajeConsultaMultiple } from "../lib/whatsapp";
+import { Seo } from "../lib/seo";
+import { trackEvent } from "../lib/analytics";
 import { EVENTOS } from "../data/eventos";
 import type { TipoEvento, Vehiculo } from "../types";
 
@@ -38,6 +40,12 @@ export function Consulta() {
   if (vehiculos.length === 0) {
     return (
       <Container className="flex flex-col items-center gap-4 py-20 text-center lg:py-32">
+        <Seo
+          title="Mi consulta"
+          description="Armá una consulta con varios vehículos para preguntar disponibilidad por WhatsApp."
+          path="/consulta"
+          noindex
+        />
         <SectionTitle
           eyebrow="Mi consulta"
           title="Todavía no agregaste vehículos"
@@ -51,6 +59,12 @@ export function Consulta() {
 
   return (
     <Container className="py-12 lg:py-16">
+      <Seo
+        title="Mi consulta"
+        description="Armá una consulta con varios vehículos para preguntar disponibilidad por WhatsApp."
+        path="/consulta"
+        noindex
+      />
       <SectionTitle
         eyebrow="Mi consulta"
         title="Consulta múltiple"
@@ -165,7 +179,13 @@ export function Consulta() {
             />
           </label>
 
-          <Button variant="whatsapp" href={whatsappHref} external className="mt-2 w-full">
+          <Button
+            variant="whatsapp"
+            href={whatsappHref}
+            external
+            className="mt-2 w-full"
+            onClick={() => trackEvent("whatsapp_multiple", { cantidad: vehiculos.length })}
+          >
             Enviar por WhatsApp
           </Button>
         </div>

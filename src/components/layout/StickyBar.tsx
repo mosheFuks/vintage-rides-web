@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { MessageCircle, ClipboardList } from "lucide-react";
 import { useConsulta } from "../../lib/consulta";
 import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
+import { trackEvent } from "../../lib/analytics";
 
 const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
@@ -14,6 +15,7 @@ export function StickyBar() {
         href={WHATSAPP_HREF}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackEvent("whatsapp_general")}
         className="flex flex-1 items-center justify-center gap-2 bg-whatsapp py-4 text-sm font-medium tracking-wide text-white uppercase transition-colors duration-200 hover:bg-whatsapp-hover"
       >
         <MessageCircle className="size-4" />

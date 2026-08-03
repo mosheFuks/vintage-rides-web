@@ -2,6 +2,7 @@ import { Button } from "../ui/Button";
 import { Container } from "../ui/Container";
 import { SectionTitle } from "../ui/SectionTitle";
 import { armarUrlWhatsapp, mensajeGeneral } from "../../lib/whatsapp";
+import { trackEvent } from "../../lib/analytics";
 
 const WHATSAPP_HREF = armarUrlWhatsapp(mensajeGeneral());
 
@@ -16,7 +17,12 @@ export function CtaFinal() {
           align="center"
         />
         <div className="flex flex-wrap justify-center gap-4">
-          <Button href={WHATSAPP_HREF} external variant="whatsapp">
+          <Button
+            href={WHATSAPP_HREF}
+            external
+            variant="whatsapp"
+            onClick={() => trackEvent("whatsapp_general")}
+          >
             Consultar por WhatsApp
           </Button>
           <Button href="/consulta" variant="outline">

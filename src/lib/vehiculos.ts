@@ -16,6 +16,13 @@ export function getDestacados(): Vehiculo[] {
   return VEHICULOS.filter((v) => v.destacado);
 }
 
+/** Nombre + año, salvo que el nombre ya incluya el año (frecuente en este inventario, ej. "Ford A 1930"). */
+export function nombreConAnio(vehiculo: Vehiculo): string {
+  if (!vehiculo.anio) return vehiculo.nombre;
+  if (vehiculo.nombre.includes(String(vehiculo.anio))) return vehiculo.nombre;
+  return `${vehiculo.nombre} ${vehiculo.anio}`;
+}
+
 function normalizar(texto: string): string {
   return texto
     .normalize("NFD")
