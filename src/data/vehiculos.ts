@@ -15,7 +15,7 @@ export const VEHICULOS: Vehiculo[] = [
     eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
     descripcionCorta: "Un auto antiguo para darle carácter a tu evento.",
     descripcionLarga: "Hupmobile 1930 es un auto antiguo del año 1930.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/hupmobile-1930/01.jpg"], // TODO: reemplazar por fotos reales
+    imagenes: ["/img/vehiculos/hupmobile-1930/01.png"],
     destacado: false,
   },
   {
