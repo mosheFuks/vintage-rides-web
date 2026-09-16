@@ -1,6 +1,6 @@
 import { VEHICULOS } from "../data/vehiculos";
 import { TRABAJOS } from "../data/trabajos";
-import type { CategoriaId, TipoEvento, Trabajo, Vehiculo } from "../types";
+import type { CategoriaId, Trabajo, Vehiculo } from "../types";
 
 export function getPorCategoria(categoria: CategoriaId): Vehiculo[] {
   return VEHICULOS.filter(
@@ -33,11 +33,7 @@ function normalizar(texto: string): string {
 export interface FiltrosVehiculo {
   texto?: string;
   categorias?: CategoriaId[];
-  eventos?: TipoEvento[];
   decadas?: number[];
-  colores?: string[];
-  convertible?: boolean;
-  capacidadMinima?: number;
 }
 
 export function filtrar(filtros: FiltrosVehiculo): Vehiculo[] {
@@ -55,17 +51,9 @@ export function filtrar(filtros: FiltrosVehiculo): Vehiculo[] {
         v.tambienEn?.some((c) => filtros.categorias!.includes(c));
       if (!enCategoria) return false;
     }
-    if (filtros.eventos?.length && !v.eventos.some((e) => filtros.eventos!.includes(e))) {
-      return false;
-    }
     if (filtros.decadas?.length && (v.decada === null || !filtros.decadas.includes(v.decada))) {
       return false;
     }
-    if (filtros.colores?.length && !v.colores.some((c) => filtros.colores!.includes(c))) {
-      return false;
-    }
-    if (filtros.convertible !== undefined && v.convertible !== filtros.convertible) return false;
-    if (filtros.capacidadMinima !== undefined && v.capacidad < filtros.capacidadMinima) return false;
     return true;
   });
 }
@@ -75,15 +63,6 @@ export function getDecadasDisponibles(): number[] {
     VEHICULOS.map((v) => v.decada).filter((d): d is number => d !== null)
   );
   return [...decadas].sort((a, b) => a - b);
-}
-
-export function getColoresDisponibles(): string[] {
-  const colores = new Set(VEHICULOS.flatMap((v) => v.colores));
-  return [...colores].sort((a, b) => a.localeCompare(b, "es"));
-}
-
-export function getCapacidadMaxima(): number {
-  return Math.max(...VEHICULOS.map((v) => v.capacidad));
 }
 
 export function getTrabajosDeVehiculo(vehiculoId: string): Trabajo[] {

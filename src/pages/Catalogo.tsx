@@ -7,15 +7,10 @@ import { Button } from "../components/ui/Button";
 import { VehiculoCard } from "../components/vehiculos/VehiculoCard";
 import { FiltrosCatalogo } from "../components/catalogo/FiltrosCatalogo";
 import { CATEGORIAS } from "../data/categorias";
-import {
-  filtrar,
-  getCapacidadMaxima,
-  getColoresDisponibles,
-  getDecadasDisponibles,
-} from "../lib/vehiculos";
+import { filtrar, getDecadasDisponibles } from "../lib/vehiculos";
 import { Seo } from "../lib/seo";
 import { trackEvent } from "../lib/analytics";
-import type { CategoriaId, TipoEvento } from "../types";
+import type { CategoriaId } from "../types";
 
 const LOTE = 24;
 
@@ -31,8 +26,6 @@ export function Catalogo() {
   const [textoInput, setTextoInput] = useState(searchParams.get("q") ?? "");
 
   const decadasDisponibles = useMemo(() => getDecadasDisponibles(), []);
-  const coloresDisponibles = useMemo(() => getColoresDisponibles(), []);
-  const capacidadMaxima = useMemo(() => getCapacidadMaxima(), []);
 
   // Pre-carga el filtro de categoría al entrar por /catalogo/:categoria, sin pisar una selección ya presente en la URL.
   useEffect(() => {
@@ -59,11 +52,7 @@ export function Catalogo() {
   }, [textoInput]);
 
   const categorias = leerLista(searchParams, "categoria") as CategoriaId[];
-  const eventos = leerLista(searchParams, "evento") as TipoEvento[];
   const decadas = leerLista(searchParams, "decada").map(Number);
-  const colores = leerLista(searchParams, "color");
-  const convertible = searchParams.get("convertible") === "1";
-  const capacidadMinima = Number(searchParams.get("capacidad") ?? 1);
 
   function actualizar(mut: (params: URLSearchParams) => void) {
     const next = new URLSearchParams(searchParams);
@@ -87,11 +76,7 @@ export function Catalogo() {
       filtrar({
         texto: searchParams.get("q") ?? undefined,
         categorias: categorias.length ? categorias : undefined,
-        eventos: eventos.length ? eventos : undefined,
         decadas: decadas.length ? decadas : undefined,
-        colores: colores.length ? colores : undefined,
-        convertible: convertible || undefined,
-        capacidadMinima: capacidadMinima > 1 ? capacidadMinima : undefined,
       }),
     [searchParams.toString()]
   );
@@ -102,13 +87,7 @@ export function Catalogo() {
   }, [searchParams.toString()]);
 
   const hayFiltrosActivos =
-    categorias.length > 0 ||
-    eventos.length > 0 ||
-    decadas.length > 0 ||
-    colores.length > 0 ||
-    convertible ||
-    capacidadMinima > 1 ||
-    Boolean(searchParams.get("q"));
+    categorias.length > 0 || decadas.length > 0 || Boolean(searchParams.get("q"));
 
   function limpiarFiltros() {
     setTextoInput("");
@@ -125,27 +104,9 @@ export function Catalogo() {
   const propsFiltros = {
     categorias,
     onToggleCategoria: (id: CategoriaId) => toggleEnLista("categoria", id),
-    eventos,
-    onToggleEvento: (id: TipoEvento) => toggleEnLista("evento", id),
     decadas,
     decadasDisponibles,
     onToggleDecada: (decada: number) => toggleEnLista("decada", String(decada)),
-    colores,
-    coloresDisponibles,
-    onToggleColor: (color: string) => toggleEnLista("color", color),
-    capacidadMinima,
-    capacidadMaxima,
-    onCambiarCapacidad: (valor: number) =>
-      actualizar((params) => {
-        if (valor > 1) params.set("capacidad", String(valor));
-        else params.delete("capacidad");
-      }),
-    convertible,
-    onToggleConvertible: () =>
-      actualizar((params) => {
-        if (convertible) params.delete("convertible");
-        else params.set("convertible", "1");
-      }),
     hayFiltrosActivos,
     onLimpiar: limpiarFiltros,
   };
@@ -157,7 +118,7 @@ export function Catalogo() {
         description={
           categoriaSeo
             ? categoriaSeo.descripcion
-            : "Catálogo completo de vehículos de colección para alquiler: antiguos, clásicos, limousinas, motos y más."
+            : "Catálogo completo de vehículos de colección para alquiler: antiguos, modernos y limousinas."
         }
         path={categoriaSeo ? `/catalogo/${categoriaSeo.id}` : "/catalogo"}
       />
