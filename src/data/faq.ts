@@ -13,12 +13,12 @@ export const FAQS: Faq[] = [
   {
     pregunta: "¿Cuál es el mínimo de horas de contratación?",
     respuesta:
-      "El mínimo depende del vehículo y el tipo de evento. Escribinos por WhatsApp contándonos tu evento y te confirmamos disponibilidad y duración mínima.",
+      "El mínimo es de 3hs.",
   },
   {
     pregunta: "¿Qué zonas cubren? ¿Hay recargo por distancia?",
     respuesta:
-      "Cubrimos CABA y GBA. Para zonas más alejadas puede aplicar un recargo por traslado, te lo confirmamos al cotizar.",
+      "Cubrimos CABA. En caso de pasar las 3hs de contratación, puede aplicar un recargo.",
   },
   {
     pregunta: "¿Cómo se reserva? ¿Se pide seña?",
