@@ -414,667 +414,232 @@ export const VEHICULOS: Vehiculo[] = [
     destacado: false,
   },
   {
-    id: "kaiser-carabela-1959",
-    nombre: "Kaiser Carabela 1959",
-    anio: 1959,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Rojo"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en rojo para darle carácter a tu evento.",
-    descripcionLarga: "Kaiser Carabela 1959 es un auto clásico del año 1959 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/kaiser-carabela-1959/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "de-soto-1951-conv",
-    nombre: "De Soto 1951 Convertible",
-    anio: 1951,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "De Soto 1951 Convertible es un auto clásico del año 1951. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/de-soto-1951-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-1952",
-    nombre: "Chevrolet 1952",
-    anio: 1952,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet 1952 es un auto clásico del año 1952. Zona Quilmes.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-1952/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-    nota: "Zona Quilmes",
-  },
-  {
-    id: "chevrolet-1951",
-    nombre: "Chevrolet 1951",
-    anio: 1951,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet 1951 es un auto clásico del año 1951.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-1951/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "de-soto-1951-4p",
-    nombre: "De Soto 1951 4 Puertas",
-    anio: 1951,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Negro"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en negro para darle carácter a tu evento.",
-    descripcionLarga: "De Soto 1951 4 Puertas es un auto clásico del año 1951 en color negro.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/de-soto-1951-4p/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-1951-cupe",
-    nombre: "Chevrolet 1951 Cupé",
-    anio: 1951,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet 1951 Cupé es un auto clásico del año 1951.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-1951-cupe/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-bel-air-1954",
-    nombre: "Chevrolet Bel Air 1954",
-    anio: 1954,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Bel Air 1954 es un auto clásico del año 1954.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-bel-air-1954/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-bel-air-1953",
-    nombre: "Chevrolet Bel Air 1953",
-    anio: 1953,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Bel Air 1953 es un auto clásico del año 1953.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-bel-air-1953/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "cadillac-1957",
-    nombre: "Cadillac 1957",
-    anio: 1957,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Cadillac 1957 es un auto clásico del año 1957.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/cadillac-1957/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-bel-air-1956",
-    nombre: "Chevrolet Bel Air 1956",
-    anio: 1956,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Bel Air 1956 es un auto clásico del año 1956.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-bel-air-1956/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "impala-1963-conv",
-    nombre: "Chevrolet Impala 1963 Convertible",
-    anio: 1963,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: ["Amarillo"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en amarillo y con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Impala 1963 Convertible es un auto clásico del año 1963 en color amarillo. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/impala-1963-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: true,
-  },
-  {
-    id: "buick-1961-conv",
-    nombre: "Buick 1961 Convertible",
-    anio: 1961,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Buick 1961 Convertible es un auto clásico del año 1961. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/buick-1961-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mustang-1968-conv",
-    nombre: "Ford Mustang 1968 Convertible",
-    anio: 1968,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Ford Mustang 1968 Convertible es un auto clásico del año 1968. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mustang-1968-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "impala-1965",
-    nombre: "Chevrolet Impala 1965",
-    anio: 1965,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Impala 1965 es un auto clásico del año 1965.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/impala-1965/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "cadillac-1970",
-    nombre: "Cadillac 1970",
-    anio: 1970,
-    categoria: "clasicos",
-    decada: 1970,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Cadillac 1970 es un auto clásico del año 1970. Aire acondicionado.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/cadillac-1970/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-    nota: "Aire acondicionado",
-  },
-  {
-    id: "cadillac-1963-conv",
-    nombre: "Cadillac 1963 Convertible",
-    anio: 1963,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Cadillac 1963 Convertible es un auto clásico del año 1963. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo. Sin techo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/cadillac-1963-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-    nota: "Sin techo",
-  },
-  {
-    id: "camaro-1973",
-    nombre: "Chevrolet Camaro 1973",
-    anio: 1973,
-    categoria: "clasicos",
-    decada: 1970,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Camaro 1973 es un auto clásico del año 1973.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/camaro-1973/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "corvette-1980",
-    nombre: "Chevrolet Corvette 1980",
-    anio: 1980,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Corvette 1980 es un auto clásico del año 1980.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/corvette-1980/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "nsu-prinz-1961",
-    nombre: "NSU Prinz 1961",
-    anio: 1961,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "NSU Prinz 1961 es un auto clásico del año 1961.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/nsu-prinz-1961/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "isetta-300-1958",
-    nombre: "Isetta 300 1958",
-    anio: 1958,
-    categoria: "clasicos",
-    decada: 1950,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Amarillo"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en amarillo para darle carácter a tu evento.",
-    descripcionLarga: "Isetta 300 1958 es un auto clásico del año 1958 en color amarillo. Conocido como \"Ratón Alemán\".\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/isetta-300-1958/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-    nota: "Conocido como \"Ratón Alemán\"",
-  },
-  {
-    id: "sunbeam-alpine-1960",
-    nombre: "Sunbeam Alpine 1960",
-    anio: 1960,
-    categoria: "clasicos",
-    decada: 1960,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Sunbeam Alpine 1960 es un auto clásico del año 1960.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/sunbeam-alpine-1960/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mg-1972",
-    nombre: "MG 1972",
-    anio: 1972,
-    categoria: "clasicos",
-    decada: 1970,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Rojo"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en rojo para darle carácter a tu evento.",
-    descripcionLarga: "MG 1972 es un auto clásico del año 1972 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mg-1972/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mg-1979-conv",
-    nombre: "MG 1979 Convertible",
-    anio: 1979,
-    categoria: "clasicos",
-    decada: 1970,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "MG 1979 Convertible es un auto clásico del año 1979. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mg-1979-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "vw-escarabajo",
-    nombre: "VW Escarabajo",
+    id: "citroen-c4-lounge",
+    nombre: "Citroën C4 Lounge Gris",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
-    colores: ["Varios colores"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en varios colores para darle carácter a tu evento.",
-    descripcionLarga: "VW Escarabajo es un auto clásico en color varios colores.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/vw-escarabajo/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
+    colores: ["Gris"],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno en gris para darle carácter a tu evento.",
+    descripcionLarga: "Citroën C4 Lounge Gris es un auto moderno en color gris.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/citroen-c4-lounge/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: true,
   },
   {
-    id: "vw-herbie",
-    nombre: "VW Herbie",
+    id: "peugeot-508-blanco",
+    nombre: "Peugeot 508 Blanco",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: ["Blanco"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en blanco para darle carácter a tu evento.",
-    descripcionLarga: "VW Herbie es un auto clásico en color blanco.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/vw-herbie/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno en blanco para darle carácter a tu evento.",
+    descripcionLarga: "Peugeot 508 Blanco es un auto moderno en color blanco.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/peugeot-508-blanco/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {
-    id: "vw-cupe-brasilera",
-    nombre: "VW Cupé Brasilera",
+    id: "vw-new-beetle-amarillo",
+    nombre: "VW New Beetle Amarillo",
     anio: null,
-    categoria: "clasicos",
-    decada: null,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "VW Cupé Brasilera es un auto clásico.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/vw-cupe-brasilera/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mercedes-benz-1980",
-    nombre: "Mercedes Benz 1980",
-    anio: 1980,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz 1980 es un auto clásico del año 1980.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mercedes-benz-1980/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mercedes-benz-280-se-1980",
-    nombre: "Mercedes Benz 280 SE 1980",
-    anio: 1980,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz 280 SE 1980 es un auto clásico del año 1980.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mercedes-benz-280-se-1980/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mercedes-benz-pagoda-1980",
-    nombre: "Mercedes Benz Pagoda 1980 Convertible",
-    anio: 1980,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz Pagoda 1980 Convertible es un auto clásico del año 1980. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mercedes-benz-pagoda-1980/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mercedes-benz-280-sl-1983",
-    nombre: "Mercedes Benz 280 SL 1983 Convertible",
-    anio: 1983,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz 280 SL 1983 Convertible es un auto clásico del año 1983. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mercedes-benz-280-sl-1983/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mercedes-benz-500-sec",
-    nombre: "Mercedes Benz 500 SEC",
-    anio: null,
-    categoria: "clasicos",
-    decada: null,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz 500 SEC es un auto clásico.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mercedes-benz-500-sec/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "caprice-1979",
-    nombre: "Chevrolet Caprice 1979",
-    anio: 1979,
-    categoria: "clasicos",
-    decada: 1970,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Caprice 1979 es un auto clásico del año 1979.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/caprice-1979/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "toyota-celica",
-    nombre: "Toyota Celica",
-    anio: null,
-    categoria: "clasicos",
-    decada: null,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Varios colores"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en varios colores para darle carácter a tu evento.",
-    descripcionLarga: "Toyota Celica es un auto clásico en color varios colores.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/toyota-celica/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "audi-1980",
-    nombre: "Audi 1980",
-    anio: 1980,
-    categoria: "clasicos",
-    decada: 1980,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Marrón"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en marrón para darle carácter a tu evento.",
-    descripcionLarga: "Audi 1980 es un auto clásico del año 1980 en color marrón.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/audi-1980/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "taxi-nueva-york",
-    nombre: "Taxi de Nueva York",
-    anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: ["Amarillo"],
-    eventos: ["cine", "publicidad"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en amarillo para darle carácter a tu evento.",
-    descripcionLarga: "Taxi de Nueva York es un auto clásico en color amarillo.\n\nForma parte de nuestra flota para eventos y se puede reservar para rodajes de cine y TV y producciones publicitarias, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/taxi-nueva-york/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno en amarillo para darle carácter a tu evento.",
+    descripcionLarga: "VW New Beetle Amarillo es un auto moderno en color amarillo.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/vw-new-beetle-amarillo/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {
-    id: "patrulleros-americanos",
-    nombre: "Patrulleros Americanos",
+    id: "toyota-corolla",
+    nombre: "Toyota Corolla",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: [],
-    eventos: ["cine", "publicidad"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Patrulleros Americanos es un auto clásico.\n\nForma parte de nuestra flota para eventos y se puede reservar para rodajes de cine y TV y producciones publicitarias, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/patrulleros-americanos/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Toyota Corolla es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/toyota-corolla/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {
-    id: "stratus-1997-conv",
-    nombre: "Chrysler Stratus 1997 Convertible",
-    anio: 1997,
-    categoria: "clasicos",
-    decada: 1990,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Chrysler Stratus 1997 Convertible es un auto clásico del año 1997. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/stratus-1997-conv/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "stratus-4p",
-    nombre: "Chrysler Stratus 4 Puertas",
+    id: "hyundai-cupe",
+    nombre: "Hyundai Cupé",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Chrysler Stratus 4 Puertas es un auto clásico.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/stratus-4p/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Hyundai Cupé es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/hyundai-cupe/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {
-    id: "toyota-celica-1990",
-    nombre: "Toyota Celica 1990",
-    anio: 1990,
-    categoria: "clasicos",
-    decada: 1990,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Toyota Celica 1990 es un auto clásico del año 1990.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/toyota-celica-1990/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "chevrolet-cavalier-1991",
-    nombre: "Chevrolet Cavalier 1991",
-    anio: 1991,
-    categoria: "clasicos",
-    decada: 1990,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: true,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "Chevrolet Cavalier 1991 es un auto clásico del año 1991. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/chevrolet-cavalier-1991/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "mitsubishi-eclipse",
-    nombre: "Mitsubishi Eclipse",
+    id: "volvo-v40",
+    nombre: "Volvo V40",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Mitsubishi Eclipse es un auto clásico.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mitsubishi-eclipse/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Volvo V40 es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/volvo-v40/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {
-    id: "mitsubishi-galant-1998",
-    nombre: "Mitsubishi Galant 1998",
-    anio: 1998,
-    categoria: "clasicos",
-    decada: 1990,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: ["Bordó"],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en bordó para darle carácter a tu evento.",
-    descripcionLarga: "Mitsubishi Galant 1998 es un auto clásico del año 1998 en color bordó.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/mitsubishi-galant-1998/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "daihatsu-sirion-1998",
-    nombre: "Daihatsu Sirion 1998",
-    anio: 1998,
-    categoria: "clasicos",
-    decada: 1990,
-    capacidad: 4, // TODO verificar con cliente
-    convertible: false,
-    colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico para darle carácter a tu evento.",
-    descripcionLarga: "Daihatsu Sirion 1998 es un auto clásico del año 1998.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/daihatsu-sirion-1998/01.jpg"], // TODO: reemplazar por fotos reales
-    destacado: false,
-  },
-  {
-    id: "bmw-328i-conv",
-    nombre: "BMW 328i Convertible",
+    id: "mg-convertible-moderno",
+    nombre: "MG Convertible",
     anio: null,
-    categoria: "clasicos",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: true,
     colores: [],
-    eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico con capota convertible para darle carácter a tu evento.",
-    descripcionLarga: "BMW 328i Convertible es un auto clásico. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
-    imagenes: ["/img/vehiculos/bmw-328i-conv/01.jpg"], // TODO: reemplazar por fotos reales
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno con capota convertible para darle carácter a tu evento.",
+    descripcionLarga: "MG Convertible es un auto moderno. Es una versión convertible, con la capota que se puede abrir para las fotos y el paseo. VERIFICAR si es el mismo que mg-1979-conv.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/mg-convertible-moderno/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+    nota: "VERIFICAR si es el mismo que mg-1979-conv",
+  },
+  {
+    id: "jeep-renegade-a",
+    nombre: "Jeep Renegade",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Jeep Renegade es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/jeep-renegade-a/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+  },
+  {
+    id: "jeep-renegade-b",
+    nombre: "Jeep Renegade (2)",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Jeep Renegade (2) es un auto moderno. VERIFICAR duplicado / color distinto.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/jeep-renegade-b/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+    nota: "VERIFICAR duplicado / color distinto",
+  },
+  {
+    id: "renault-duster-a",
+    nombre: "Renault Duster",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Renault Duster es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/renault-duster-a/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+  },
+  {
+    id: "renault-duster-b",
+    nombre: "Renault Duster (2)",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Renault Duster (2) es un auto moderno. VERIFICAR duplicado / color distinto.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/renault-duster-b/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+    nota: "VERIFICAR duplicado / color distinto",
+  },
+  {
+    id: "ford-territory-a",
+    nombre: "Ford Territory",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Ford Territory es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/ford-territory-a/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+  },
+  {
+    id: "ford-territory-b",
+    nombre: "Ford Territory (2)",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Ford Territory (2) es un auto moderno. VERIFICAR duplicado / color distinto.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/ford-territory-b/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+    nota: "VERIFICAR duplicado / color distinto",
+  },
+  {
+    id: "dodge-journey",
+    nombre: "Dodge Journey",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Dodge Journey es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/dodge-journey/01.jpg"], // TODO: reemplazar por fotos reales
+    destacado: false,
+  },
+  {
+    id: "honda-crv",
+    nombre: "Honda CR-V",
+    anio: null,
+    categoria: "modernos",
+    decada: null,
+    capacidad: 4, // TODO verificar con cliente
+    convertible: false,
+    colores: [],
+    eventos: ["corporativo", "turismo"], // TODO verificar con cliente
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Honda CR-V es un auto moderno.\n\nForma parte de nuestra flota para eventos y se puede reservar para eventos corporativos y paseos turísticos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    imagenes: ["/img/vehiculos/honda-crv/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
   {

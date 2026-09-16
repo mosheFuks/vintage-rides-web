@@ -10,7 +10,7 @@ export function CategoriasGrid() {
       <SectionTitle
         eyebrow="Flota"
         title="Elegí tu categoría"
-        description={`${VEHICULOS.length} vehículos organizados en ${CATEGORIAS.length} categorías, de autos antiguos a clásicos y limousinas.`}
+        description={`${VEHICULOS.length} vehículos organizados en ${CATEGORIAS.length} categorías, de autos antiguos a modernos y limousinas.`}
         align="center"
       />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

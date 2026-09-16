@@ -11,12 +11,11 @@ export const CATEGORIAS: Categoria[] = [
     cantidad: 27,
   },
   {
-    id: "clasicos",
-    nombre: "Autos clásicos",
-    descripcion:
-      "Íconos de mitad de siglo, entre convertibles y cupés, para looks clásicos con mucha personalidad.",
-    imagen: "/img/categorias/clasicos.jpg",
-    cantidad: 44,
+    id: "modernos",
+    nombre: "Autos modernos",
+    descripcion: "Autos actuales, cómodos y confiables, para traslados sin vueltas el día del evento.",
+    imagen: "/img/categorias/modernos.jpg",
+    cantidad: 15,
   },
   {
     id: "limousinas",
