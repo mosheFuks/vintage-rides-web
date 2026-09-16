@@ -13,6 +13,8 @@
 
 **Filtros del catálogo reducidos a Categoría y Década (misma rama):** a pedido del cliente, `FiltrosCatalogo.tsx` sacó los grupos "Tipo de evento", "Color", "Capacidad mínima" y "Otros" (convertible); solo quedan Categoría y Década. `Catalogo.tsx` sacó el estado/query-params de `evento`, `color`, `capacidad` y `convertible`. `filtrar()` y `FiltrosVehiculo` (`src/lib/vehiculos.ts`) se simplificaron a `texto`/`categorias`/`decadas`; se eliminaron `getColoresDisponibles()` y `getCapacidadMaxima()` por quedar sin uso. Los campos `Vehiculo.colores`/`Vehiculo.convertible`/`Vehiculo.eventos` no se tocaron: siguen usándose en la ficha técnica de `Auto.tsx`, en los mensajes de WhatsApp y en el formulario de `Consulta.tsx` — solo se sacó su filtro en el catálogo. Verificado con `npx tsc -b`, `npm run lint` y `npm run build`.
 
+**4 preguntas sacadas de la FAQ (misma rama):** a pedido del cliente, `src/data/faq.ts` perdió "¿La decoración está incluida?", "¿Se puede ver el auto antes del evento?", "¿Qué pasa si llueve?" y "¿Trabajan con producciones de cine y publicidad?" (esta última mencionaba la sección Trabajos, ya vacía y oculta). Quedan 4 preguntas: chofer, mínimo de horas, zonas/recargo y reserva/seña. `Faq.tsx` es dinámico sobre `FAQS`, no necesitó cambios. Verificado con `npx tsc -b`, `npm run lint` y `npm run build`.
+
 ---
 
 ## Fases

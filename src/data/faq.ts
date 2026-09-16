@@ -25,23 +25,4 @@ export const FAQS: Faq[] = [
     respuesta:
       "La reserva se confirma con una seña. Coordinamos el monto y la forma de pago por WhatsApp una vez definidos el vehículo y la fecha.",
   },
-  {
-    pregunta: "¿La decoración está incluida?",
-    respuesta:
-      "La decoración básica del vehículo está incluida. Para decoraciones temáticas especiales, consultanos las opciones disponibles.",
-  },
-  {
-    pregunta: "¿Se puede ver el auto antes del evento?",
-    respuesta: "Sí, podés coordinar una visita para conocer el vehículo antes de confirmar la reserva.",
-  },
-  {
-    pregunta: "¿Qué pasa si llueve?",
-    respuesta:
-      "Los convertibles se pueden usar con el techo cerrado. Si el clima no permite el traslado, coordinamos una alternativa con vos.",
-  },
-  {
-    pregunta: "¿Trabajan con producciones de cine y publicidad?",
-    respuesta:
-      "Sí, tenemos experiencia en cine, TV y publicidad. Podés ver algunos trabajos realizados en la sección Trabajos.",
-  },
 ];
