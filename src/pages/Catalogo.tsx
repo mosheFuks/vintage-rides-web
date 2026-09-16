@@ -118,7 +118,7 @@ export function Catalogo() {
         description={
           categoriaSeo
             ? categoriaSeo.descripcion
-            : "Catálogo completo de vehículos de colección para alquiler: antiguos, modernos y limousinas."
+            : "Catálogo completo de vehículos de colección para alquiler: antiguos, clásicos, limousinas y de lujo."
         }
         path={categoriaSeo ? `/catalogo/${categoriaSeo.id}` : "/catalogo"}
       />

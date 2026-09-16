@@ -26,11 +26,19 @@ Estos campos no existían en `docs/inventario-vehiculos.json` y se completaron c
 - **`capacidad`** (pasajeros): estimada por tipo de vehículo (autos/clásicos → 4, motos → 2, bicicletas → 1, colectivos → 20, limousinas → 6, kombis/motor homes → 8, jeeps → 4, resto de camionetas → 3).
 - **`eventos`**: cuando el original no especificaba, se asignó un default conservador por categoría (ver `DEFAULT_EVENTOS` usado al generar el archivo).
 - **`imagenes`**: no hay fotos todavía. Se dejó un path placeholder `/img/vehiculos/{id}/01.jpg` por vehículo — hay que cargar las fotos reales y actualizar las rutas.
-- **`destacado`**: en Fase 3 se marcaron 8 vehículos en `true` (uno por categoría) para la sección "Destacados" de la Home. Tras reducir el catálogo (ver más abajo), quedan 3: `ford-t-1924`, `citroen-c4-lounge`, `limousine-lincoln-1989`. Es una curación editorial provisoria (sin fotos reales todavía); revisar con el cliente si prefiere otros modelos.
+- **`destacado`**: en Fase 3 se marcaron 8 vehículos en `true` (uno por categoría) para la sección "Destacados" de la Home. Tras la curación final a 7 modelos (ver más abajo), queda solo 1: `mercedes-benz-e400-2020`. Es una curación editorial provisoria (sin fotos reales todavía); revisar con el cliente si prefiere otro destacado.
 
 ## Reducción de categorías (post Fase 9)
 
-A pedido del cliente, el catálogo quedó limitado a 3 de las 8 categorías originales. Primero se probó con **Autos antiguos**, **Autos clásicos** y **Limousinas y colectivos antiguos**; después el cliente pidió cambiar Clásicos por **Autos modernos**, así que la selección final quedó en **Autos antiguos**, **Autos modernos** y **Limousinas y colectivos antiguos**. Los 44 vehículos de Clásicos se eliminaron y los 15 de Modernos se recuperaron del historial de git (commit `d28ee5a`, tip de `main`). `src/data/vehiculos.ts` quedó con 53 vehículos en total; `src/data/categorias.ts` y el tipo `CategoriaId` (`src/types/index.ts`) se ajustaron a juego. Los datos de las categorías descartadas (clásicos, lujo, clásicos argentinos, motos, camionetas) ya no están en el repo, pero siguen recuperables desde `d28ee5a` si el cliente pide reincorporar alguna más adelante.
+A pedido del cliente, el catálogo pasó por varias reducciones sucesivas desde las 8 categorías originales (ver historial de commits en la rama `moshi-cars`: primero a 3 categorías con Clásicos, después con Modernos en vez de Clásicos). La versión final quedó curada a **11 modelos puntuales pedidos por el cliente**, de los cuales 7 tenían match exacto en los datos originales (4 no existían tal cual se pidieron — color inventado o variante inexistente — y el cliente confirmó omitirlos en vez de inventar el dato, ver detalle abajo). `src/data/vehiculos.ts` quedó con esos **7 vehículos**: `ford-a-1930-azul`, `mercury-1947-negro` (antiguos), `kaiser-carabela-1959` (clásicos), `limousine-chrysler-pt` (limousinas), `mercedes-benz-clase-e-2013`, `mercedes-benz-e400-2020`, `audi-a4-azul` (lujo). `src/data/categorias.ts` y `CategoriaId` (`src/types/index.ts`) quedaron con esas 4 categorías. Todos los datos de las categorías/modelos descartados en el camino siguen recuperables desde el commit `d28ee5a` (tip de `main`, inventario completo de 206) si el cliente pide reincorporar algo más adelante.
+
+**Modelos pedidos que no existían en los datos y se omitieron (confirmado con el cliente, no se inventaron):**
+- "Chevrolet 1954 verde" — solo existe `chevrolet-bel-air-1954`, sin color cargado.
+- "Kaiser Carabela 1959 blanco" — solo existe la versión roja (`kaiser-carabela-1959`).
+- "Ford A 1930 rojo" — solo existen `ford-a-1930-bordo-4p` (bordó) y `ford-a-1930-azul`.
+- "Ford A 1930 verde" — mismos dos anteriores, tampoco hay verde.
+
+**Nota sobre el resto de este documento:** las secciones de abajo (duplicados, defaults por categoría) se generaron en Fase 2 sobre el inventario completo de 206 vehículos; con el catálogo reducido a 7, la mayoría de esos ids ya no está en `vehiculos.ts` — quedan como referencia histórica, no como pendiente activo.
 
 ## Home (Fase 3)
 

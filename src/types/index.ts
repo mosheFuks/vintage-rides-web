@@ -1,4 +1,4 @@
-export type CategoriaId = "antiguos" | "modernos" | "limousinas";
+export type CategoriaId = "antiguos" | "clasicos" | "limousinas" | "lujo";
 
 export type TipoEvento =
   | "casamiento"

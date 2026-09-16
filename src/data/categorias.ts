@@ -8,14 +8,15 @@ export const CATEGORIAS: Categoria[] = [
     descripcion:
       "Modelos de las primeras décadas del automóvil, para eventos que buscan un aire de época genuino.",
     imagen: "/img/categorias/antiguos.jpg",
-    cantidad: 27,
+    cantidad: 2,
   },
   {
-    id: "modernos",
-    nombre: "Autos modernos",
-    descripcion: "Autos actuales, cómodos y confiables, para traslados sin vueltas el día del evento.",
-    imagen: "/img/categorias/modernos.jpg",
-    cantidad: 15,
+    id: "clasicos",
+    nombre: "Autos clásicos",
+    descripcion:
+      "Íconos de mitad de siglo, entre convertibles y cupés, para looks clásicos con mucha personalidad.",
+    imagen: "/img/categorias/clasicos.jpg",
+    cantidad: 1,
   },
   {
     id: "limousinas",
@@ -23,6 +24,13 @@ export const CATEGORIAS: Categoria[] = [
     descripcion:
       "Vehículos pensados para trasladar grupos con estilo: limousinas y colectivos de época.",
     imagen: "/img/categorias/limousinas.jpg",
-    cantidad: 11,
+    cantidad: 1,
+  },
+  {
+    id: "lujo",
+    nombre: "Autos de lujo",
+    descripcion: "Sedanes premium para llegadas de alto nivel, con toda la comodidad.",
+    imagen: "/img/categorias/lujo.jpg",
+    cantidad: 3,
   },
 ];
