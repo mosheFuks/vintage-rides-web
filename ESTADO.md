@@ -5,7 +5,9 @@
 
 **Última fase completada:** 9 — SEO + performance + analytics
 **Próxima fase:** 10 — QA final
-**Rama activa:** `feat/fase-9-seo-performance-analytics` (sin mergear a `main` todavía)
+**Rama activa:** `moshi-cars` (sin mergear a `main` todavía) — trabajo fuera del plan de fases, ver "Reducción de categorías" más abajo
+
+**Cambio fuera del plan (rama `moshi-cars`):** a pedido del cliente, el catálogo se redujo de 8 a 3 categorías: **Autos antiguos**, **Autos clásicos** y **Limousinas y colectivos antiguos**. Se eliminaron de `src/data/vehiculos.ts` los 124 vehículos de las 5 categorías restantes (modernos, lujo, clásicos argentinos, motos, camionetas) — quedan **82 vehículos**. `CategoriaId` (`src/types/index.ts`) y `src/data/categorias.ts` se redujeron a esas 3. Se ajustó la copy de `CategoriasGrid.tsx` y `data/about.ts` que mencionaba categorías eliminadas (el resto de los conteos en Home/Nosotros/Prueba social son dinámicos vía `VEHICULOS.length`/`CATEGORIAS.length`, no hizo falta tocarlos). Detalle y nota de recuperación en `PENDIENTES-CLIENTE.md` → "Reducción de categorías (post Fase 9)". Verificado con `npx tsc -b`, `npm run lint` y `npm run build` (92 páginas: 82 vehículos + 3 categorías + 7 estáticas, antes eran 221).
 
 ---
 

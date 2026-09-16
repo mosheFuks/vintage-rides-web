@@ -1,12 +1,4 @@
-export type CategoriaId =
-  | "antiguos"
-  | "clasicos"
-  | "limousinas"
-  | "modernos"
-  | "lujo"
-  | "clasicos-argentinos"
-  | "motos"
-  | "camionetas";
+export type CategoriaId = "antiguos" | "clasicos" | "limousinas";
 
 export type TipoEvento =
   | "casamiento"

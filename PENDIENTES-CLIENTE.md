@@ -26,7 +26,11 @@ Estos campos no existían en `docs/inventario-vehiculos.json` y se completaron c
 - **`capacidad`** (pasajeros): estimada por tipo de vehículo (autos/clásicos → 4, motos → 2, bicicletas → 1, colectivos → 20, limousinas → 6, kombis/motor homes → 8, jeeps → 4, resto de camionetas → 3).
 - **`eventos`**: cuando el original no especificaba, se asignó un default conservador por categoría (ver `DEFAULT_EVENTOS` usado al generar el archivo).
 - **`imagenes`**: no hay fotos todavía. Se dejó un path placeholder `/img/vehiculos/{id}/01.jpg` por vehículo — hay que cargar las fotos reales y actualizar las rutas.
-- **`destacado`**: en Fase 3 se marcaron 8 vehículos en `true` (uno por categoría) para la sección "Destacados" de la Home: `ford-t-1924`, `impala-1963-conv`, `limousine-lincoln-1989`, `citroen-c4-lounge`, `mercedes-benz-e400-2020`, `falcon-1968`, `harley-davidson`, `vw-kombi-1972-celeste`. Es una curación editorial provisoria (sin fotos reales todavía); revisar con el cliente si prefiere otros modelos.
+- **`destacado`**: en Fase 3 se marcaron 8 vehículos en `true` (uno por categoría) para la sección "Destacados" de la Home. Tras reducir el catálogo a solo Autos antiguos, Clásicos y Limousinas (ver más abajo), quedan 3: `ford-t-1924`, `impala-1963-conv`, `limousine-lincoln-1989`. Es una curación editorial provisoria (sin fotos reales todavía); revisar con el cliente si prefiere otros modelos.
+
+## Reducción de categorías (post Fase 9)
+
+A pedido del cliente, el catálogo quedó limitado a 3 de las 8 categorías originales: **Autos antiguos**, **Autos clásicos** y **Limousinas y colectivos antiguos**. Se eliminaron de `src/data/vehiculos.ts` los 124 vehículos de las 5 categorías restantes (modernos, lujo, clásicos argentinos, motos, camionetas), quedando 82 vehículos en total. `src/data/categorias.ts` y el tipo `CategoriaId` (`src/types/index.ts`) se redujeron a juego. Si el cliente pide reincorporar alguna categoría más adelante, los datos originales de esos vehículos ya no están en el repo (se puede recuperar del historial de git de este cambio si hace falta).
 
 ## Home (Fase 3)
 
