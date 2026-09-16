@@ -33,24 +33,26 @@ export function PruebaSocial() {
         ))}
       </div>
 
-      <div className="mt-14 flex gap-6 overflow-x-auto pb-2">
-        {TRABAJOS.map((trabajo) => (
-          <Link
-            key={trabajo.id}
-            to="/trabajos"
-            className="group relative flex aspect-video w-72 shrink-0 items-end overflow-hidden rounded-lg border border-borde bg-superficie"
-          >
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-200 group-hover:scale-105"
-              style={{ backgroundImage: `url(${trabajo.imagen})` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/40 to-transparent" />
-            <span className="relative p-4 text-sm font-medium tracking-wide text-texto uppercase">
-              {trabajo.titulo}
-            </span>
-          </Link>
-        ))}
-      </div>
+      {TRABAJOS.length > 0 && (
+        <div className="mt-14 flex gap-6 overflow-x-auto pb-2">
+          {TRABAJOS.map((trabajo) => (
+            <Link
+              key={trabajo.id}
+              to="/trabajos"
+              className="group relative flex aspect-video w-72 shrink-0 items-end overflow-hidden rounded-lg border border-borde bg-superficie"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-200 group-hover:scale-105"
+                style={{ backgroundImage: `url(${trabajo.imagen})` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/40 to-transparent" />
+              <span className="relative p-4 text-sm font-medium tracking-wide text-texto uppercase">
+                {trabajo.titulo}
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
     </Container>
   );
 }

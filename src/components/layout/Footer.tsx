@@ -6,7 +6,6 @@ import { Container } from "../ui/Container";
 const SECCIONES = [
   { to: "/catalogo", label: "Catálogo" },
   { to: "/nosotros", label: "Nosotros" },
-  { to: "/trabajos", label: "Trabajos" },
   { to: "/faq", label: "FAQ" },
   { to: "/contacto", label: "Contacto" },
 ];

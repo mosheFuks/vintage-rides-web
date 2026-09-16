@@ -11,7 +11,9 @@ const ANIOS_TRAYECTORIA = new Date().getFullYear() - 1991;
 const STATS = [
   { valor: `${ANIOS_TRAYECTORIA}+`, label: "Años de trayectoria" },
   { valor: `${VEHICULOS.length}`, label: "Vehículos en flota" },
-  { valor: `${TRABAJOS.length}`, label: "Producciones documentadas" },
+  ...(TRABAJOS.length > 0
+    ? [{ valor: `${TRABAJOS.length}`, label: "Producciones documentadas" }]
+    : []),
 ];
 
 export function Nosotros() {
@@ -33,7 +35,11 @@ export function Nosotros() {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-6 border-y border-borde py-8 lg:grid-cols-1 lg:border-0 lg:py-0">
+        <div
+          className={`grid gap-6 border-y border-borde py-8 lg:grid-cols-1 lg:border-0 lg:py-0 ${
+            STATS.length === 3 ? "grid-cols-3" : "grid-cols-2"
+          }`}
+        >
           {STATS.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1 text-center lg:items-start lg:text-left">
               <span className="font-display text-4xl text-acento">{stat.valor}</span>

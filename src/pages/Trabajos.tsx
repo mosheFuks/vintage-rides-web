@@ -44,6 +44,7 @@ export function Trabajos() {
         title="Trabajos realizados"
         description="Cine, publicidad, turismo y eventos donde estuvo presente la flota de vehículos de colección."
         path="/trabajos"
+        noindex={TRABAJOS.length === 0}
       />
       <SectionTitle
         eyebrow="Producciones"
