@@ -38,14 +38,14 @@ export const VEHICULOS: Vehiculo[] = [
     id: "kaiser-carabela-1959",
     nombre: "Kaiser Carabela 1959",
     anio: 1959,
-    categoria: "clasicos",
+    categoria: "antiguos",
     decada: 1950,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: ["Rojo"],
     eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
-    descripcionCorta: "Un auto clásico en rojo para darle carácter a tu evento.",
-    descripcionLarga: "Kaiser Carabela 1959 es un auto clásico del año 1959 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto clásico llegue impecable el día del evento.",
+    descripcionCorta: "Un auto antiguo en rojo para darle carácter a tu evento.",
+    descripcionLarga: "Kaiser Carabela 1959 es un auto antiguo del año 1959 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/kaiser-carabela-1959/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -68,14 +68,14 @@ export const VEHICULOS: Vehiculo[] = [
     id: "mercedes-benz-clase-e-2013",
     nombre: "Mercedes Benz Clase E 2013",
     anio: 2013,
-    categoria: "lujo",
+    categoria: "modernos",
     decada: 2010,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: [],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
-    descripcionCorta: "Un auto de lujo para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz Clase E 2013 es un auto de lujo del año 2013.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto de lujo llegue impecable el día del evento.",
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Mercedes Benz Clase E 2013 es un auto moderno del año 2013.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercedes-benz-clase-e-2013/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -83,14 +83,14 @@ export const VEHICULOS: Vehiculo[] = [
     id: "mercedes-benz-e400-2020",
     nombre: "Mercedes Benz E400 2020",
     anio: 2020,
-    categoria: "lujo",
+    categoria: "modernos",
     decada: 2020,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: [],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
-    descripcionCorta: "Un auto de lujo para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz E400 2020 es un auto de lujo del año 2020.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto de lujo llegue impecable el día del evento.",
+    descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
+    descripcionLarga: "Mercedes Benz E400 2020 es un auto moderno del año 2020.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercedes-benz-e400-2020/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: true,
   },
@@ -98,14 +98,14 @@ export const VEHICULOS: Vehiculo[] = [
     id: "audi-a4-azul",
     nombre: "Audi A4 Azul",
     anio: null,
-    categoria: "lujo",
+    categoria: "modernos",
     decada: null,
     capacidad: 4, // TODO verificar con cliente
     convertible: false,
     colores: ["Azul"],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
-    descripcionCorta: "Un auto de lujo en azul para darle carácter a tu evento.",
-    descripcionLarga: "Audi A4 Azul es un auto de lujo en color azul.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto de lujo llegue impecable el día del evento.",
+    descripcionCorta: "Un auto moderno en azul para darle carácter a tu evento.",
+    descripcionLarga: "Audi A4 Azul es un auto moderno en color azul.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/audi-a4-azul/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   }
