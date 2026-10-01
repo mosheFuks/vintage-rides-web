@@ -16,10 +16,7 @@ export function Hero() {
     >
       <div className="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/60 to-fondo/10" />
       <Container className="relative pb-16 lg:pb-24">
-        <span className="text-sm font-medium tracking-[0.2em] text-acento uppercase">
-          Desde 1991
-        </span>
-        <h1 className="mt-4 max-w-3xl font-display text-5xl tracking-wide text-texto uppercase lg:text-7xl">
+        <h1 className="max-w-3xl font-display text-5xl tracking-wide text-texto uppercase lg:text-7xl">
           {SITE.tagline}
         </h1>
         <p className="mt-4 max-w-xl text-texto-secundario">

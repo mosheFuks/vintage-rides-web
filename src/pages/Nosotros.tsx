@@ -6,10 +6,7 @@ import { VEHICULOS } from "../data/vehiculos";
 import { TRABAJOS } from "../data/trabajos";
 import { Seo } from "../lib/seo";
 
-const ANIOS_TRAYECTORIA = new Date().getFullYear() - 1991;
-
 const STATS = [
-  { valor: `${ANIOS_TRAYECTORIA}+`, label: "Años de trayectoria" },
   { valor: `${VEHICULOS.length}`, label: "Vehículos en flota" },
   ...(TRABAJOS.length > 0
     ? [{ valor: `${TRABAJOS.length}`, label: "Producciones documentadas" }]
@@ -38,7 +35,7 @@ export function Nosotros() {
 
         <div
           className={`grid gap-6 border-y border-borde py-8 lg:grid-cols-1 lg:border-0 lg:py-0 ${
-            STATS.length === 3 ? "grid-cols-3" : "grid-cols-2"
+            STATS.length === 1 ? "grid-cols-1" : "grid-cols-2"
           }`}
         >
           {STATS.map((stat) => (

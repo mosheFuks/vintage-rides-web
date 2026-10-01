@@ -21,6 +21,8 @@
 
 **Nosotros oculta de la nav, no eliminada (misma rama):** a pedido del cliente, se sacó el link "Nosotros" de `Header.tsx` y `Footer.tsx` (mismo patrón ya usado con Trabajos). La ruta `/nosotros` sigue existiendo con su contenido real (historia, stats, qué incluye el alquiler) y se sigue prerenderizando; solo se le agregó `noindex` a su `Seo` ya que no es alcanzable desde la navegación. No se tocó `ABOUT`/`STATS` ni ningún otro dato. Verificado con `npx tsc -b`, `npm run lint` y `npm run build` (17 páginas, sin cambios de cantidad).
 
+**Sacado todo "desde 1991" del sitio (misma rama):** a pedido del cliente, se eliminó cualquier mención al año de fundación 1991 (no se inventó un año nuevo, solo se sacó la referencia). Afectó: `Hero.tsx` (sacado el eyebrow "Desde 1991"), `PruebaSocial.tsx` y `Nosotros.tsx` (sacado el stat "Años de trayectoria" que calculaba `new Date().getFullYear() - 1991`, y el título "Vehículos de colección desde 1991" de `PruebaSocial` pasó a "Vehículos de colección"), `data/about.ts` (el primer párrafo de la historia ya no arranca con "Desde 1991") y las 7 `descripcionLarga` de `vehiculos.ts` (pasaron de "...de colección desde 1991, cuidando..." a "...de colección, cuidando..."). Los grids de stats de `PruebaSocial` (ahora 2 items fijos) y `Nosotros` (1 o 2 según haya trabajos) se ajustaron para no dejar un hueco. Verificado con `npx tsc -b`, `npm run lint` y `npm run build`; confirmado con grep que no queda "1991" en el HTML generado.
+
 ---
 
 ## Fases

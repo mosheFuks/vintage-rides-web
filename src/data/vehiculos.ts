@@ -14,7 +14,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: ["Azul"],
     eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
     descripcionCorta: "Un auto antiguo en azul para darle carácter a tu evento.",
-    descripcionLarga: "Ford A 1930 Azul es un auto antiguo del año 1930 en color azul. Capota fija.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
+    descripcionLarga: "Ford A 1930 Azul es un auto antiguo del año 1930 en color azul. Capota fija.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/ford-a-1930-azul/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
     nota: "Capota fija",
@@ -30,7 +30,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: ["Negro"],
     eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
     descripcionCorta: "Un auto antiguo en negro para darle carácter a tu evento.",
-    descripcionLarga: "Mercury 1947 Negro 4 Puertas es un auto antiguo del año 1947 en color negro.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
+    descripcionLarga: "Mercury 1947 Negro 4 Puertas es un auto antiguo del año 1947 en color negro.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercury-1947-negro/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -45,7 +45,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: ["Rojo"],
     eventos: ["casamiento", "aniversario"], // TODO verificar con cliente
     descripcionCorta: "Un auto antiguo en rojo para darle carácter a tu evento.",
-    descripcionLarga: "Kaiser Carabela 1959 es un auto antiguo del año 1959 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
+    descripcionLarga: "Kaiser Carabela 1959 es un auto antiguo del año 1959 en color rojo.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y aniversarios, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto antiguo llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/kaiser-carabela-1959/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -60,7 +60,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: [],
     eventos: ["casamiento", "quince", "corporativo"], // TODO verificar con cliente
     descripcionCorta: "Una limousina para darle carácter a tu evento.",
-    descripcionLarga: "Limousine Chrysler PT es una limousina.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos, fiestas de 15 y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este limousina llegue impecable el día del evento.",
+    descripcionLarga: "Limousine Chrysler PT es una limousina.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos, fiestas de 15 y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este limousina llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/limousine-chrysler-pt/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -75,7 +75,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: [],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
     descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz Clase E 2013 es un auto moderno del año 2013.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    descripcionLarga: "Mercedes Benz Clase E 2013 es un auto moderno del año 2013.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercedes-benz-clase-e-2013/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   },
@@ -90,7 +90,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: [],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
     descripcionCorta: "Un auto moderno para darle carácter a tu evento.",
-    descripcionLarga: "Mercedes Benz E400 2020 es un auto moderno del año 2020.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    descripcionLarga: "Mercedes Benz E400 2020 es un auto moderno del año 2020.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/mercedes-benz-e400-2020/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: true,
   },
@@ -105,7 +105,7 @@ export const VEHICULOS: Vehiculo[] = [
     colores: ["Azul"],
     eventos: ["casamiento", "corporativo"], // TODO verificar con cliente
     descripcionCorta: "Un auto moderno en azul para darle carácter a tu evento.",
-    descripcionLarga: "Audi A4 Azul es un auto moderno en color azul.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección desde 1991, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
+    descripcionLarga: "Audi A4 Azul es un auto moderno en color azul.\n\nForma parte de nuestra flota para eventos y se puede reservar para casamientos y eventos corporativos, con traslado y chofer incluido.\n\nTrabajamos con vehículos de colección, cuidando cada detalle para que este auto moderno llegue impecable el día del evento.",
     imagenes: ["/img/vehiculos/audi-a4-azul/01.jpg"], // TODO: reemplazar por fotos reales
     destacado: false,
   }

@@ -5,10 +5,7 @@ import { VEHICULOS } from "../../data/vehiculos";
 import { CATEGORIAS } from "../../data/categorias";
 import { TRABAJOS } from "../../data/trabajos";
 
-const ANIOS_TRAYECTORIA = new Date().getFullYear() - 1991;
-
 const STATS = [
-  { valor: `${ANIOS_TRAYECTORIA}+`, label: "Años de trayectoria" },
   { valor: `${VEHICULOS.length}`, label: "Vehículos en flota" },
   { valor: `${CATEGORIAS.length}`, label: "Categorías" },
 ];
@@ -18,11 +15,11 @@ export function PruebaSocial() {
     <Container className="py-20 lg:py-32">
       <SectionTitle
         eyebrow="Trayectoria"
-        title="Vehículos de colección desde 1991"
+        title="Vehículos de colección"
         align="center"
       />
 
-      <div className="grid grid-cols-1 gap-8 border-y border-borde py-10 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 border-y border-borde py-10 sm:grid-cols-2">
         {STATS.map((stat) => (
           <div key={stat.label} className="flex flex-col items-center gap-2 text-center">
             <span className="font-display text-5xl text-acento">{stat.valor}</span>
