@@ -23,6 +23,7 @@ export function Nosotros() {
         title="Quiénes somos"
         description="Conocé la historia, la trayectoria y qué incluye el alquiler de nuestra flota de vehículos de colección."
         path="/nosotros"
+        noindex
       />
       <SectionTitle eyebrow="Nosotros" title="Quiénes somos" />
 

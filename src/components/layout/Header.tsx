@@ -6,7 +6,6 @@ import { useConsulta } from "../../lib/consulta";
 
 const NAV_LINKS = [
   { to: "/catalogo", label: "Catálogo" },
-  { to: "/nosotros", label: "Nosotros" },
   { to: "/faq", label: "FAQ" },
   { to: "/contacto", label: "Contacto" },
 ];

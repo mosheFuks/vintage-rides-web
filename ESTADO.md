@@ -19,6 +19,8 @@
 
 **4 preguntas sacadas de la FAQ (misma rama):** a pedido del cliente, `src/data/faq.ts` perdió "¿La decoración está incluida?", "¿Se puede ver el auto antes del evento?", "¿Qué pasa si llueve?" y "¿Trabajan con producciones de cine y publicidad?" (esta última mencionaba la sección Trabajos, ya vacía y oculta). Quedan 4 preguntas: chofer, mínimo de horas, zonas/recargo y reserva/seña. `Faq.tsx` es dinámico sobre `FAQS`, no necesitó cambios. Verificado con `npx tsc -b`, `npm run lint` y `npm run build`.
 
+**Nosotros oculta de la nav, no eliminada (misma rama):** a pedido del cliente, se sacó el link "Nosotros" de `Header.tsx` y `Footer.tsx` (mismo patrón ya usado con Trabajos). La ruta `/nosotros` sigue existiendo con su contenido real (historia, stats, qué incluye el alquiler) y se sigue prerenderizando; solo se le agregó `noindex` a su `Seo` ya que no es alcanzable desde la navegación. No se tocó `ABOUT`/`STATS` ni ningún otro dato. Verificado con `npx tsc -b`, `npm run lint` y `npm run build` (17 páginas, sin cambios de cantidad).
+
 ---
 
 ## Fases
